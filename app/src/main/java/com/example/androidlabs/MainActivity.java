@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
     {
-        Snackbar.make(layout, getResources().getString(R.string.snack_line), Snackbar.LENGTH_LONG);
-        snbr.setAction("Undu", click -> sw.setChecked(!sw));
+        //Snackbar.make(layout, getResources().getString(R.string.snack_line), Snackbar.LENGTH_LONG);
+        //snbr.setAction("Undu", click -> sw.setChecked(!sw));
     }
 }
