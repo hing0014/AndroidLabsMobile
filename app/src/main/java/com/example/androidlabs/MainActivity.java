@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.CompoundButton;
+import android.widget.GridLayout;
+
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -18,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button bu;
     Switch sw;
-    RelativeLayout layout;
+    GridLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,14 +30,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bu = findViewById(R.id.button);
         bu.setOnClickListener(this);
 
+
         layout = findViewById(R.id.gridlayout);
-        sw = findViewById(R.id.switcher);
-        sw.setOnCheckedChangeListener( (whatClicked, newState) -> Snackbar.make(layout, getResources().getString(R.string.snack_line), Snackbar.LENGTH_LONG).setAction("Hello class", (v) -> whatClicked.setChecked(false)).show());
+        Switch sw = findViewById(R.id.switcher);
+        sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked)
+            {
+                Snackbar.make(layout, "The switch is now on", Snackbar.LENGTH_LONG).setAction("Undo", (v) -> buttonView.setChecked(false)).show();
+            } else
+            {
+                Snackbar.make(layout, "The switch is now off", Snackbar.LENGTH_LONG).setAction("Undo", (v) -> buttonView.setChecked(true)).show();
+            }
+        });
     }
 
     @Override
     public void onClick(View v)
     {
-        Toast.makeText(MainActivity.this, getResources().getString(R.string.toast_message) , Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, getResources().getString(R.string.toast_message), Toast.LENGTH_LONG).show();
     }
 }
