@@ -5,4 +5,7 @@
     <string name="CheckText">Check this out!</string>
     <string name="toast_message">Here is more information</string>
     <string name="snack_line">Le commutateur est maintenant </string>
+    <string name="type_here">Type here</string>
+    <string name="switch_on_off">Switch On/Off</string>
+    <string name="canadian_flag">Canadian Flag</string>
 </resources>
