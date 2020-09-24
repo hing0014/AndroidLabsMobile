@@ -10,6 +10,6 @@
     <string name="switch_on_off">Allumer / éteindre</string>
     <string name="switch_on">L\'interrupteur est maintenant activé</string>
     <string name="switch_off">L\'interrupteur est maintenant éteint</string>
-    <string name="canadian_flag">Canadian Flag</string>
+    <string name="flag">Drapeau français</string>
     <string name="undo">annuler</string>
 </resources>

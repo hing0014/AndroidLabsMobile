@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="fill"
             android:layout_weight="1"
-            android:contentDescription="@string/canadian_flag"
+            android:contentDescription="@string/flag"
             android:src="@drawable/flag" />
 
         <Switch

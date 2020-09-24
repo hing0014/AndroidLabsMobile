@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -19,18 +20,18 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button bu;
     Switch sw;
-    GridLayout layout;
+    LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_grid);
+        setContentView(R.layout.activity_main_linear);
         bu = findViewById(R.id.button);
         bu.setOnClickListener(this);
 
 
-        layout = findViewById(R.id.gridlayout);
+        layout = findViewById(R.id.layout);
         Switch sw = findViewById(R.id.switcher);
         sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked)

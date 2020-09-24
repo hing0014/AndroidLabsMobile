@@ -9,6 +9,6 @@
     <string name="switch_on_off">Switch On/Off</string>
     <string name="switch_on">The switch is now on</string>
     <string name="switch_off">The switch is now off</string>
-    <string name="canadian_flag">Canadian Flag</string>
+    <string name="flag">Canadian Flag</string>
     <string name="undo">Undo</string>
 </resources>
