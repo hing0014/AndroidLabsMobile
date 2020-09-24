@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bu.setOnClickListener(this);
 
 
-
         layout = findViewById(R.id.layout);
         Switch sw = findViewById(R.id.switcher);
         sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
