@@ -21,13 +21,13 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button bu;
     Switch sw;
-    GridLayout layout;
+    LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_grid);
+        setContentView(R.layout.activity_main_linear);
         bu = findViewById(R.id.button);
         bu.setOnClickListener(this);
 
