@@ -36,10 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked)
             {
-                Snackbar.make(layout, "The switch is now on", Snackbar.LENGTH_LONG).setAction("Undo", (v) -> buttonView.setChecked(false)).show();
+                Snackbar.make(layout, getResources().getString(R.string.switch_on), Snackbar.LENGTH_LONG).setAction(getResources().getString(R.string.undo), (v) -> buttonView.setChecked(false)).show();
             } else
             {
-                Snackbar.make(layout, "The switch is now off", Snackbar.LENGTH_LONG).setAction("Undo", (v) -> buttonView.setChecked(true)).show();
+                Snackbar.make(layout, getResources().getString(R.string.switch_off), Snackbar.LENGTH_LONG).setAction(getResources().getString(R.string.undo), (v) -> buttonView.setChecked(true)).show();
             }
         });
     }

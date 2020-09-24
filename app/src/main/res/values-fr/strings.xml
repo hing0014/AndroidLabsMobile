@@ -4,9 +4,12 @@
     <string name="hello_message">Regardez mon GUI</string>
     <string name="ButtonText">CLIQUEZ ICI</string>
     <string name="CheckText">Regarde ça!</string>
-    <string name="toast_message">Here is more information</string>
+    <string name="toast_message">Voici plus d\'informations</string>
     <string name="snack_line">Le commutateur est maintenant </string>
-    <string name="type_here">Type here</string>
-    <string name="switch_on_off">Switch On/Off</string>
+    <string name="type_here">Écrivez ici</string>
+    <string name="switch_on_off">Allumer / éteindre</string>
+    <string name="switch_on">L\'interrupteur est maintenant activé</string>
+    <string name="switch_off">L\'interrupteur est maintenant éteint</string>
     <string name="canadian_flag">Canadian Flag</string>
+    <string name="undo">annuler</string>
 </resources>
