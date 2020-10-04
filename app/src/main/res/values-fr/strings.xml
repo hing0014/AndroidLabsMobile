@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="empty"> </string>
     <string name="app_name">AndroidLabs</string>
     <string name="hello_message">Regardez mon GUI</string>
     <string name="ButtonText">S\'IDENTIFIER</string>
