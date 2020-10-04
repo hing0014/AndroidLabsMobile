@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,12 +36,12 @@
             android:text="@string/your_email"
             />
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="@string/type_here"
-            android:inputType="textPassword"
-            android:labelFor="@id/email"
+            android:hint="@string/type_email_here"
+            android:inputType="textEmailAddress"
             />
         <TextView
         android:layout_width="match_parent"
