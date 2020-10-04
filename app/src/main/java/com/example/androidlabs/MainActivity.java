@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
 
 import android.widget.LinearLayout;
@@ -19,30 +20,63 @@ import com.google.android.material.snackbar.Snackbar;
  * https://www.youtube.com/watch?v=gAPTK9jORuM
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Button bu;
-    Switch sw;
+    EditText email;
     LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_linear);
-        bu = findViewById(R.id.button);
-        bu.setOnClickListener(this);
+        setContentView(R.layout.activity_main_lab3);
+        email = findViewById(R.id.email);
+//        bu.setOnClickListener(this);
+//
+//
+//        layout = findViewById(R.id.layout);
+//        Switch sw = findViewById(R.id.switcher);
+//        sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
+//            if (isChecked)
+//            {
+//                Snackbar.make(layout, getResources().getString(R.string.switch_on), Snackbar.LENGTH_LONG).setAction(getResources().getString(R.string.undo), (v) -> buttonView.setChecked(false)).show();
+//            } else
+//            {
+//                Snackbar.make(layout, getResources().getString(R.string.switch_off), Snackbar.LENGTH_LONG).setAction(getResources().getString(R.string.undo), (v) -> buttonView.setChecked(true)).show();
+//            }
+//        });
+    }
 
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+    }
 
-        layout = findViewById(R.id.layout);
-        Switch sw = findViewById(R.id.switcher);
-        sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked)
-            {
-                Snackbar.make(layout, getResources().getString(R.string.switch_on), Snackbar.LENGTH_LONG).setAction(getResources().getString(R.string.undo), (v) -> buttonView.setChecked(false)).show();
-            } else
-            {
-                Snackbar.make(layout, getResources().getString(R.string.switch_off), Snackbar.LENGTH_LONG).setAction(getResources().getString(R.string.undo), (v) -> buttonView.setChecked(true)).show();
-            }
-        });
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+
     }
 
     @Override
@@ -50,4 +84,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         Toast.makeText(MainActivity.this, getResources().getString(R.string.toast_message), Toast.LENGTH_LONG).show();
     }
+
+    public void saveEmail(String s)
+    {
+
+    }
+
 }
