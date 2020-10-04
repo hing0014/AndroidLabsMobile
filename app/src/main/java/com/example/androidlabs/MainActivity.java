@@ -2,6 +2,8 @@ package com.example.androidlabs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,16 +24,24 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText email;
     LinearLayout layout;
-
+    SharedPreferences prefs = null;
+    Button bu;
+    String savedEmail;
+    EditText typeField;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_lab3);
         email = findViewById(R.id.email);
-//        bu.setOnClickListener(this);
-//
-//
+        prefs = getSharedPreferences("emailFile", Context.MODE_PRIVATE);
+        savedEmail = prefs.getString("email", "");
+        typeField = email;
+        typeField.setText(savedEmail);
+        bu = findViewById(R.id.loginButton);
+        bu.setOnClickListener(bt -> saveSharedPrefs(typeField.getText().toString()));
+
+
 //        layout = findViewById(R.id.layout);
 //        Switch sw = findViewById(R.id.switcher);
 //        sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -62,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onPause()
     {
         super.onPause();
-
+        saveSharedPrefs(typeField.getText().toString());
     }
 
     @Override
@@ -85,9 +95,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(MainActivity.this, getResources().getString(R.string.toast_message), Toast.LENGTH_LONG).show();
     }
 
-    public void saveEmail(String s)
+    public void saveSharedPrefs(String stringToSave)
     {
-
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("email", stringToSave);
+        editor.apply();
     }
 
 }

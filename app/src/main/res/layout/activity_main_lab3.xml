@@ -8,6 +8,7 @@
     tools:ignore="UseSwitchCompatOrMaterialXml">
 
     <TextView
+        android:id="@+id/emaillabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/emailPrompt"
@@ -31,7 +32,12 @@
         android:layout_height="wrap_content"
         android:autofillHints="@string/type_here"
         android:inputType="textPassword"
-        android:labelFor="@id/email"
+        android:hint=" "
         />
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ButtonText" />
 
 </LinearLayout>

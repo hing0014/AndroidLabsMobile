@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">AndroidLabs</string>
     <string name="hello_message">Regardez mon GUI</string>
-    <string name="ButtonText">CLIQUEZ ICI</string>
+    <string name="ButtonText">S\'IDENTIFIER</string>
     <string name="CheckText">Regarde ça!</string>
     <string name="toast_message">Voici plus d\'informations</string>
     <string name="snack_line">Le commutateur est maintenant </string>
@@ -15,4 +15,10 @@
     <string name="emailPrompt">Entrez votre adresse email:</string>
     <string name="type_email_here">Saisissez votre e-mail ici</string>
     <string name="enter_password_text">Tapez votre mot de passe:</string>
+    <string name="your_profile">Votre profil</string>
+    <string name="your_name">Votre nom:</string>
+    <string name="type_name_here">Entrez votre nom</string>
+    <string name="your_email">Votre email:</string>
+    <string name="your_picture">Ta photo:</string>
+    <string name="click_above">Cliquez sur le bouton ci-dessus pour prendre une photo.</string>
 </resources>

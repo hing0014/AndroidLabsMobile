@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">AndroidLabs</string>
     <string name="hello_message">Look at my GUI</string>
-    <string name="ButtonText">CLICK HERE</string>
+    <string name="ButtonText">LOGIN</string>
     <string name="CheckText">Check this out!</string>
     <string name="toast_message">Here is more information</string>
     <string name="snack_line">The switch is now </string>
@@ -15,4 +15,10 @@
     <string name="emailPrompt">Enter your email address:</string>
     <string name="type_email_here">Type email here</string>
     <string name="enter_password_text">Type your password:</string>
+    <string name="your_profile">Your profile</string>
+    <string name="your_name">Your name:</string>
+    <string name="type_name_here">Enter your name</string>
+    <string name="your_email">Your email:</string>
+    <string name="your_picture">Your picture:</string>
+    <string name="click_above">Click the button above to take a picture.</string>
 </resources>
