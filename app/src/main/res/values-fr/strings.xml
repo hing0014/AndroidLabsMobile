@@ -12,4 +12,7 @@
     <string name="switch_off">L\'interrupteur est maintenant éteint</string>
     <string name="flag">Drapeau français</string>
     <string name="undo">annuler</string>
+    <string name="emailPrompt">Entrez votre adresse email:</string>
+    <string name="type_email_here">Saisissez votre e-mail ici</string>
+    <string name="enter_password_text">Tapez votre mot de passe:</string>
 </resources>
