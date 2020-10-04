@@ -25,31 +25,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String savedEmail;
     EditText typeField;
     BreakIterator emailEditText;
+    Intent goToProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_lab3);
         email = findViewById(R.id.email);
-        prefs = getSharedPreferences("emailFile", Context.MODE_PRIVATE);
+        prefs = getSharedPreferences("file", Context.MODE_PRIVATE);
         savedEmail = prefs.getString("email", "");
         typeField = email;
         typeField.setText(savedEmail);
         bu = findViewById(R.id.loginButton);
         bu.setOnClickListener(bt -> saveSharedPrefs(typeField.getText().toString()));
+        bu.setOnClickListener(bt -> startActivity(goToProfile));
+        goToProfile = new Intent(MainActivity.this, ProfileActivity.class);
 
-
-//        layout = findViewById(R.id.layout);
-//        Switch sw = findViewById(R.id.switcher);
-//        sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if (isChecked)
-//            {
-//                Snackbar.make(layout, getResources().getString(R.string.switch_on), Snackbar.LENGTH_LONG).setAction(getResources().getString(R.string.undo), (v) -> buttonView.setChecked(false)).show();
-//            } else
-//            {
-//                Snackbar.make(layout, getResources().getString(R.string.switch_off), Snackbar.LENGTH_LONG).setAction(getResources().getString(R.string.undo), (v) -> buttonView.setChecked(true)).show();
-//            }
-//        });
     }
 
     @Override
@@ -89,9 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v)
     {
-        Intent goToProfile = new Intent(MainActivity.this, ProfileActivity.class);
-        goToProfile.putExtra("email", "… what is written in the edit text");
-        emailEditText.setText( "… the string from Intent extras …");
+        goToProfile.putExtra("email", savedEmail);
+        emailEditText.setText(savedEmail);
     }
 
     public void saveSharedPrefs(String stringToSave)

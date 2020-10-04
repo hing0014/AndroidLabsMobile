@@ -20,12 +20,10 @@ public class ProfileActivity extends AppCompatActivity {
     EditText email;
     LinearLayout layout;
     SharedPreferences prefs = null;
-    Button bu;
     String savedEmail;
     EditText typeField;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
-    ImageButton imgBu;
     ImageView mImageButton;
     Intent fromMain;
 
@@ -35,32 +33,32 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         email = findViewById(R.id.email);
-        prefs = getSharedPreferences("emailFile", Context.MODE_PRIVATE);
+        prefs = getSharedPreferences("file", Context.MODE_PRIVATE);
         savedEmail = prefs.getString("email", "");
         typeField = email;
         typeField.setText(savedEmail);
 
-        imgBu = findViewById(R.id.pictureButton);
-        imgBu.setOnClickListener(bt -> dispatchTakePictureIntent());
-
-        Log.e(ACTIVITY_NAME, "In function:" + /* replace with function name */);
+        mImageButton = findViewById(R.id.pictureButton);
+        mImageButton.setOnClickListener(bt -> dispatchTakePictureIntent());
 
         fromMain = getIntent();
         fromMain.getStringExtra("email");
+
+        Log.e(ACTIVITY_NAME, "In function:" + "onCreate");
     }
 
     @Override
     protected void onStart()
     {
         super.onStart();
-        Log.e(ACTIVITY_NAME, "In function:" + /* replace with function name */);
+        Log.e(ACTIVITY_NAME, "In function:" + "onStart");
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
-        Log.e(ACTIVITY_NAME, "In function:" + /* replace with function name */);
+        Log.e(ACTIVITY_NAME, "In function:" + "onResume");
 
     }
 
@@ -69,7 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
     {
         super.onPause();
         saveSharedPrefs(typeField.getText().toString());
-        Log.e(ACTIVITY_NAME, "In function:" + /* replace with function name */);
+        Log.e(ACTIVITY_NAME, "In function:" + "onPause");
 
     }
 
@@ -77,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onStop()
     {
         super.onStop();
-        Log.e(ACTIVITY_NAME, "In function:" + /* replace with function name */);
+        Log.e(ACTIVITY_NAME, "In function:" + "onStop");
 
     }
 
@@ -85,7 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onDestroy()
     {
         super.onDestroy();
-        Log.e(ACTIVITY_NAME, "In function:" + /* replace with function name */);
+        Log.e(ACTIVITY_NAME, "In function:" + "onDestroy");
 
     }
 
@@ -108,9 +106,10 @@ public class ProfileActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("emailFile");
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
             mImageButton.setImageBitmap(imageBitmap);
         }
+        Log.e(ACTIVITY_NAME, "In function:" + "onActivityResult");
     }
 
 
