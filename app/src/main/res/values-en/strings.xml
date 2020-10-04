@@ -12,4 +12,7 @@
     <string name="switch_off">The switch is now off</string>
     <string name="flag">Canadian Flag</string>
     <string name="undo">Undo</string>
+    <string name="emailPrompt">Enter your email address:</string>
+    <string name="type_email_here">Type email here</string>
+    <string name="enter_password_text">Type your password:</string>
 </resources>

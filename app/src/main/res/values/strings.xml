@@ -1,14 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AndroidLabs</string>
     <string name="hello_message">Look at my GUI</string>
     <string name="ButtonText">CLICK HERE</string>
     <string name="CheckText">Check this out!</string>
-    <string name="toast_message">Voici plus d\'informations</string>
-    <string name="snack_line">Le commutateur est maintenant </string>
+    <string name="toast_message">Here is more information</string>
+    <string name="snack_line">The switch is now </string>
     <string name="type_here">Type here</string>
     <string name="switch_on_off">Switch On/Off</string>
     <string name="switch_on">The switch is now on</string>
     <string name="switch_off">The switch is now off</string>
     <string name="flag">Canadian Flag</string>
     <string name="undo">Undo</string>
+    <string name="emailPrompt">Enter your email address:</string>
+    <string name="type_email_here">Type email here</string>
+    <string name="enter_password_text">Type your password:</string>
 </resources>
