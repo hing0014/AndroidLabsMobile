@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,8 +24,10 @@ public class ProfileActivity extends AppCompatActivity {
     String savedEmail;
     EditText typeField;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
     ImageButton imgBu;
     ImageView mImageButton;
+    Intent fromMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +42,25 @@ public class ProfileActivity extends AppCompatActivity {
 
         imgBu = findViewById(R.id.pictureButton);
         imgBu.setOnClickListener(bt -> dispatchTakePictureIntent());
+
+        Log.e(ACTIVITY_NAME, "In function:" + /* replace with function name */);
+
+        fromMain = getIntent();
+        fromMain.getStringExtra("email");
     }
 
     @Override
     protected void onStart()
     {
         super.onStart();
+        Log.e(ACTIVITY_NAME, "In function:" + /* replace with function name */);
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
+        Log.e(ACTIVITY_NAME, "In function:" + /* replace with function name */);
 
     }
 
@@ -59,6 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
     {
         super.onPause();
         saveSharedPrefs(typeField.getText().toString());
+        Log.e(ACTIVITY_NAME, "In function:" + /* replace with function name */);
 
     }
 
@@ -66,6 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onStop()
     {
         super.onStop();
+        Log.e(ACTIVITY_NAME, "In function:" + /* replace with function name */);
 
     }
 
@@ -73,6 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onDestroy()
     {
         super.onDestroy();
+        Log.e(ACTIVITY_NAME, "In function:" + /* replace with function name */);
 
     }
 
