@@ -27,11 +27,11 @@ public class ChatRoomActivity extends AppCompatActivity {
         // Before this function, the screen is empty.
         setContentView(R.layout.activity_chat_room);
 
-//        Button addButton = findViewById(R.id.send);
-//        addButton.setOnClickListener( click -> {
-//            elements.add("Hi");
-//            myAdapter.notifyDataSetChanged();
-//        });
+        Button addButton = findViewById(R.id.send);
+        addButton.setOnClickListener( click -> {
+            elements.add("Hi");
+            myAdapter.notifyDataSetChanged();
+        });
 
         ListView myList = findViewById(R.id.theListView);
         myList.setAdapter( myAdapter = new MyListAdapter());
