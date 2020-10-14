@@ -25,18 +25,17 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         // setContentView loads objects onto the screen.
         // Before this function, the screen is empty.
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_chat_room);
 
-        Button addButton = findViewById(R.id.send);
-        addButton.setOnClickListener( click -> {
-            elements.add("Hi");
-            myAdapter.notifyDataSetChanged();
-        });
+//        Button addButton = findViewById(R.id.send);
+//        addButton.setOnClickListener( click -> {
+//            elements.add("Hi");
+//            myAdapter.notifyDataSetChanged();
+//        });
 
         ListView myList = findViewById(R.id.theListView);
         myList.setAdapter( myAdapter = new MyListAdapter());
         myList.setOnItemClickListener( (parent, view, pos, id) -> {
-
             elements.remove(pos);
             myAdapter.notifyDataSetChanged();
         }   );
