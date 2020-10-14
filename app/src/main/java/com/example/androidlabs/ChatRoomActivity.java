@@ -8,28 +8,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class ChatRoomActivity extends AppCompatActivity {
-    private ArrayList<String> elements = new ArrayList<>( Arrays.asList( "One", "Two" ) );
+public class ChatRoomActivity extends AppCompatActivity
+{
+    private ArrayList<Message> elements = new ArrayList<>();
     private MyListAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // setContentView loads objects onto the screen.
         // Before this function, the screen is empty.
         setContentView(R.layout.activity_chat_room);
 
-        Button addButton = findViewById(R.id.send);
-        addButton.setOnClickListener( click -> {
-            elements.add("Hi");
+        Button sendButton = findViewById(R.id.send);
+        sendButton.setOnClickListener( click -> {
+            TextView textView = (TextView) findViewById(R.id.message);
+            String messageText = textView.getText().toString();
+            Message message = new Message("send",messageText);
+            elements.add(message);
+            myAdapter.notifyDataSetChanged();
+        });
+
+        Button recButton = findViewById(R.id.receive);
+        recButton.setOnClickListener( click -> {
+            TextView textView = (TextView) findViewById(R.id.message);
+            String messageText = textView.getText().toString();
+            Message message = new Message("receive",messageText);
+            elements.add(message);
             myAdapter.notifyDataSetChanged();
         });
 
@@ -41,27 +51,62 @@ public class ChatRoomActivity extends AppCompatActivity {
         }   );
     }
 
-    private class MyListAdapter extends BaseAdapter {
+    private class MyListAdapter extends BaseAdapter
+    {
 
         public int getCount() { return elements.size();}
 
-        public Object getItem(int position) { return "This is row " + position; }
+        public Object getItem(int position){return position;}
 
         public long getItemId(int position) { return (long) position; }
 
         public View getView(int position, View old, ViewGroup parent)
         {
+            View newView;
+            Message arEl = elements.get(position);
             LayoutInflater inflater = getLayoutInflater();
-
-            //make a new row:
-            View newView = inflater.inflate(R.layout.send_layout, parent, false);
-
-            //set what the text should be for this row:
-            TextView tView = newView.findViewById(R.id.textGoesHere);
-            tView.setText( getItem(position).toString() );
-
-            //return it to be put in the table
+            if(arEl.getType().equals("send"))
+            {
+                newView = inflater.inflate(R.layout.send_layout, parent, false);
+                TextView messageText = newView.findViewById(R.id.textGoesHere);
+                messageText.setText(arEl.getMessage());
+            }
+            else
+            {
+                newView = inflater.inflate(R.layout.receive_layout, parent, false);
+                TextView messageText = newView.findViewById(R.id.textGoesHere);
+                messageText.setText(arEl.getMessage());
+            }
             return newView;
+        }
+    }
+
+    private class Message
+    {
+        String message;
+        String type;
+
+        private Message(String type, String message)
+        {
+            setMessage(message);
+            setType(type);
+        }
+
+        public String getMessage()
+        {
+            return message;
+        }
+        public String getType()
+        {
+            return type;
+        }
+        private void setMessage(String message)
+        {
+            this.message = message;
+        }
+        private void setType(String type)
+        {
+            this.type = type;
         }
     }
 }
