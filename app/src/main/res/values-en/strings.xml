@@ -25,4 +25,6 @@
     <string name="goToChat">Go To Chat</string>
     <string name="send">SEND</string>
     <string name="receive">RECEIVE</string>
+    <string name="receiveIcon">Harley Quinn</string>
+    <string name="sendIcon">The Joker</string>
 </resources>

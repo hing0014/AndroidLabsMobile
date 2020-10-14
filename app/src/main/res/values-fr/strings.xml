@@ -25,4 +25,6 @@
     <string name="goToChat">aller discuter</string>
     <string name="send">ENVOYER</string>
     <string name="receive">RECEVOIR</string>
+    <string name="receiveIcon">Harley Quinn</string>
+    <string name="sendIcon">The Joker</string>
 </resources>

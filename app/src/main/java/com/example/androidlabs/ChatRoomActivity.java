@@ -2,7 +2,6 @@ package com.example.androidlabs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +53,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             LayoutInflater inflater = getLayoutInflater();
 
             //make a new row:
-            View newView = inflater.inflate(R.layout.row_layout, parent, false);
+            View newView = inflater.inflate(R.layout.receive_Layout, parent, false);
 
             //set what the text should be for this row:
             TextView tView = newView.findViewById(R.id.textGoesHere);
