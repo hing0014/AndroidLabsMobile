@@ -26,6 +26,8 @@ public class ProfileActivity extends AppCompatActivity {
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
     ImageView mImageButton;
     Intent fromMain;
+    Button bu;
+    Intent goToChatRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         fromMain = getIntent();
         fromMain.getStringExtra("email");
-
         Log.e(ACTIVITY_NAME, "In function:" + "onCreate");
+
+        bu = findViewById(R.id.goToChat);
+        bu.setOnClickListener(bt -> startActivity(goToChatRoom));
+        goToChatRoom = new Intent(ProfileActivity.this, ChatRoomActivity.class);
     }
 
     @Override
