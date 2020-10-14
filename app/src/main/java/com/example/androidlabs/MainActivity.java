@@ -19,7 +19,6 @@ import java.text.BreakIterator;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText email;
-    LinearLayout layout;
     SharedPreferences prefs = null;
     Button bu;
     String savedEmail;
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_lab3);
+        setContentView(R.layout.activity_main_lab4);
         email = findViewById(R.id.email);
         prefs = getSharedPreferences("file", Context.MODE_PRIVATE);
         savedEmail = prefs.getString("email", "");
