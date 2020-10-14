@@ -21,15 +21,16 @@ public class ChatRoomActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView loads objects onto the screen.
-        // Before this function, the screen is empty.
         setContentView(R.layout.activity_chat_room);
+
+        ListView myList = findViewById(R.id.theListView);
+        myList.setAdapter(myAdapter = new MyListAdapter());
 
         Button sendButton = findViewById(R.id.send);
         sendButton.setOnClickListener( click -> {
             TextView textView = (TextView) findViewById(R.id.message);
             String messageText = textView.getText().toString();
-            Message message = new Message("send",messageText);
+            Message message = new Message("send", messageText);
             elements.add(message);
             myAdapter.notifyDataSetChanged();
         });
@@ -38,13 +39,11 @@ public class ChatRoomActivity extends AppCompatActivity
         recButton.setOnClickListener( click -> {
             TextView textView = (TextView) findViewById(R.id.message);
             String messageText = textView.getText().toString();
-            Message message = new Message("receive",messageText);
+            Message message = new Message("receive", messageText);
             elements.add(message);
             myAdapter.notifyDataSetChanged();
         });
 
-        ListView myList = findViewById(R.id.theListView);
-        myList.setAdapter( myAdapter = new MyListAdapter());
         myList.setOnItemClickListener( (parent, view, pos, id) -> {
             elements.remove(pos);
             myAdapter.notifyDataSetChanged();
@@ -81,7 +80,7 @@ public class ChatRoomActivity extends AppCompatActivity
         }
     }
 
-    private class Message
+    private static class Message
     {
         String message;
         String type;
