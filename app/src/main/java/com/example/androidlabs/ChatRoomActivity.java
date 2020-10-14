@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -53,7 +54,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             LayoutInflater inflater = getLayoutInflater();
 
             //make a new row:
-            View newView = inflater.inflate(R.layout.receive_Layout, parent, false);
+            View newView = inflater.inflate(R.layout.send_layout, parent, false);
 
             //set what the text should be for this row:
             TextView tView = newView.findViewById(R.id.textGoesHere);

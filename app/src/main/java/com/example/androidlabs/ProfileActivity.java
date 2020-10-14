@@ -17,17 +17,17 @@ import android.widget.LinearLayout;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    EditText email;
-    LinearLayout layout;
-    SharedPreferences prefs = null;
-    String savedEmail;
-    EditText typeField;
+    private EditText email;
+    private LinearLayout layout;
+    private SharedPreferences prefs = null;
+    private String savedEmail;
+    private EditText typeField;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
-    ImageView mImageButton;
-    Intent fromMain;
-    Button bu;
-    Intent goToChatRoom;
+    private ImageView mImageButton;
+    private Intent fromMain;
+    private Button bu;
+    private Intent goToChatRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

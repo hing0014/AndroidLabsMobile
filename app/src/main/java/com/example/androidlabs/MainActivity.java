@@ -18,13 +18,13 @@ import java.text.BreakIterator;
  * https://www.youtube.com/watch?v=gAPTK9jORuM
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    EditText email;
-    SharedPreferences prefs = null;
-    Button bu;
-    String savedEmail;
-    EditText typeField;
-    BreakIterator emailEditText;
-    Intent goToProfile;
+    private EditText email;
+    private SharedPreferences prefs = null;
+    private Button bu;
+    private String savedEmail;
+    private EditText typeField;
+    private BreakIterator emailEditText;
+    private Intent goToProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

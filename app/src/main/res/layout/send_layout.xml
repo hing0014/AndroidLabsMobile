@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:columnCount="2"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:columnCount="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -21,4 +23,5 @@
         android:layout_columnWeight="0"
         android:src="@drawable/row_send"
         />
-</GridLayout>
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
