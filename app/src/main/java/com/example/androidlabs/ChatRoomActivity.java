@@ -2,6 +2,7 @@ package com.example.androidlabs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ public class ChatRoomActivity extends AppCompatActivity
             Message message = new Message("send", messageText);
             elements.add(message);
             myAdapter.notifyDataSetChanged();
+            textView.setText("");
         });
 
         Button recButton = findViewById(R.id.receive);
@@ -43,12 +45,15 @@ public class ChatRoomActivity extends AppCompatActivity
             Message message = new Message("receive", messageText);
             elements.add(message);
             myAdapter.notifyDataSetChanged();
+            textView.setText("");
         });
 
         myList.setOnItemClickListener( (parent, view, pos, id) -> {
-            Toast.makeText(ChatRoomActivity.this, "Click success", Toast.LENGTH_LONG).show();
-            elements.remove(pos);
-            myAdapter.notifyDataSetChanged();
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Do you want to delete this?").setMessage("The selected row is: " + pos + "\nThe database id is: " + id)
+                    .setPositiveButton("Yes", (click, arg) -> {  elements.remove(pos); myAdapter.notifyDataSetChanged();})
+                    .setNegativeButton("No", (click, arg) -> {  })
+                    .create().show();
         }   );
     }
 
