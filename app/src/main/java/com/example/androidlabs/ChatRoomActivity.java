@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -45,6 +46,7 @@ public class ChatRoomActivity extends AppCompatActivity
         });
 
         myList.setOnItemClickListener( (parent, view, pos, id) -> {
+            Toast.makeText(ChatRoomActivity.this, "Click success", Toast.LENGTH_LONG).show();
             elements.remove(pos);
             myAdapter.notifyDataSetChanged();
         }   );
