@@ -19,7 +19,6 @@ public class ChatRoomActivity extends AppCompatActivity
 {
     private ArrayList<Message> elements = new ArrayList<>();
     private MyListAdapter myAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +49,7 @@ public class ChatRoomActivity extends AppCompatActivity
 
         myList.setOnItemClickListener( (parent, view, pos, id) -> {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Do you want to delete this?").setMessage("The selected row is: " + pos + "\nThe database id is: " + id)
+            alertDialogBuilder.setTitle(getResources().getString(R.string.do_delete)).setMessage(getResources().getString(R.string.desc1) + pos + getResources().getString(R.string.desc2) + id)
                     .setPositiveButton("Yes", (click, arg) -> {  elements.remove(pos); myAdapter.notifyDataSetChanged();})
                     .setNegativeButton("No", (click, arg) -> {  })
                     .create().show();
