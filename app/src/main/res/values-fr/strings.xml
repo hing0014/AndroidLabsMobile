@@ -29,5 +29,5 @@
     <string name="sendIcon">The Joker</string>
     <string name="do_delete">Voulez-vous le supprimer?</string>
     <string name="desc1">La ligne sélectionnée est: </string>
-    <string name="desc2">L'ID de la base de données est: </string>
+    <string name="desc2">L\'ID de la base de données est: </string>
 </resources>
