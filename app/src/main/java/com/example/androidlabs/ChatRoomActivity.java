@@ -3,6 +3,7 @@ package com.example.androidlabs;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +24,6 @@ public class ChatRoomActivity extends AppCompatActivity
     private ArrayList<Message> elements = new ArrayList<>();
     private MyListAdapter myAdapter;
     SQLiteDatabase db;
-    long msgCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +37,25 @@ public class ChatRoomActivity extends AppCompatActivity
         sendButton.setOnClickListener( click -> {
             TextView textView = findViewById(R.id.message);
             String messageText = textView.getText().toString();
-            ++msgCount;
-            Message message = new Message("send", messageText, msgCount);
-            elements.add(message);
+            ContentValues newRowValues = new ContentValues();
+            newRowValues.put(MyOpener.COL_MESSAGE, messageText);
+            newRowValues.put(MyOpener.COL_SENDER, "send");
+            long newId = db.insert(MyOpener.TABLE_NAME, null, newRowValues);
+            elements.add(new Message("send", messageText, newId));
             myAdapter.notifyDataSetChanged();
             textView.setText("");
+            Toast.makeText(this, "Inserted item id:"+newId, Toast.LENGTH_LONG).show();
         });
 
         Button recButton = findViewById(R.id.receive);
         recButton.setOnClickListener( click -> {
             TextView textView = findViewById(R.id.message);
             String messageText = textView.getText().toString();
-            ++msgCount;
-            Message message = new Message("receive", messageText, msgCount);
-            elements.add(message);
+            ContentValues newRowValues = new ContentValues();
+            newRowValues.put(MyOpener.COL_MESSAGE, messageText);
+            newRowValues.put(MyOpener.COL_SENDER, "receive");
+            long newId = db.insert(MyOpener.TABLE_NAME, null, newRowValues);
+            elements.add(new Message("receive", messageText, newId));
             myAdapter.notifyDataSetChanged();
             textView.setText("");
         });
@@ -57,7 +63,12 @@ public class ChatRoomActivity extends AppCompatActivity
         myList.setOnItemClickListener( (parent, view, pos, id) -> {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(getResources().getString(R.string.do_delete)).setMessage(getResources().getString(R.string.desc1) + pos + getResources().getString(R.string.desc2) + id)
-                    .setPositiveButton("Yes", (click, arg) -> {  elements.remove(pos); myAdapter.notifyDataSetChanged();})
+                    .setPositiveButton("Yes", (click, arg) ->
+                    {
+                        Message selectedContact = elements.get(pos);
+                        deleteContact(selectedContact);
+                        elements.remove(pos); myAdapter.notifyDataSetChanged();
+                    })
                     .setNegativeButton("No", (click, arg) -> {  })
                     .create().show();
         }   );
@@ -101,8 +112,8 @@ public class ChatRoomActivity extends AppCompatActivity
 
         private Message(String type, String message, long i)
         {
-            this.message = message;
             this.type = type;
+            this.message = message;
             this.id = i;
 
         }
@@ -147,9 +158,13 @@ public class ChatRoomActivity extends AppCompatActivity
             long id = results.getLong(idColIndex);
 
             //add the new Contact to the array list:
-            elements.add(new Message(message, sender, id));
+            elements.add(new Message(sender, message, id));
         }
-
-        //At this point, the contactsList array has loaded every row from the cursor.
     }
+
+    protected void deleteContact(Message c)
+    {
+        db.delete(MyOpener.TABLE_NAME, MyOpener.COL_ID + "= ?", new String[] {Long.toString(c.getId())});
+    }
+
 }
