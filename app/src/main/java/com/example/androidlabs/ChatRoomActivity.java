@@ -175,9 +175,8 @@ public class ChatRoomActivity extends AppCompatActivity
         Log.e("Column Names", c.getColumnName(0) + " " + c.getColumnName(1) + " " + c.getColumnName(2));
         Log.e("Row Quantity", Integer.toString(c.getCount()));
 
-        while(!(c.isAfterLast()))
+        while(c.moveToNext())
         {
-            c.moveToNext();
             String index = c.getString( c.getColumnIndex(MyOpener.COL_ID));
             String sender = c.getString( c.getColumnIndex(MyOpener.COL_SENDER));
             String message = c.getString( c.getColumnIndex(MyOpener.COL_MESSAGE));
@@ -186,6 +185,6 @@ public class ChatRoomActivity extends AppCompatActivity
 
             Log.e("Row", mesg);
         }
-
+        c.moveToPosition(-1);
     }
 }
