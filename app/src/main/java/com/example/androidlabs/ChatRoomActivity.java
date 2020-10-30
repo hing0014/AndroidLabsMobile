@@ -7,12 +7,12 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,7 +67,8 @@ public class ChatRoomActivity extends AppCompatActivity
                     {
                         Message selectedContact = elements.get(pos);
                         deleteContact(selectedContact);
-                        elements.remove(pos); myAdapter.notifyDataSetChanged();
+                        elements.remove(pos);
+                        myAdapter.notifyDataSetChanged();
                     })
                     .setNegativeButton("No", (click, arg) -> {  })
                     .create().show();
@@ -143,7 +144,7 @@ public class ChatRoomActivity extends AppCompatActivity
         String [] columns = {MyOpener.COL_ID, MyOpener.COL_MESSAGE, MyOpener.COL_SENDER};
         //query all the results from the database:
         Cursor results = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
-
+        printCursor(results, db.getVersion());
         //Now the results object has rows of results that match the query.
         //find the column indices:
         int messageColumnIndex = results.getColumnIndex(MyOpener.COL_MESSAGE);
@@ -167,4 +168,24 @@ public class ChatRoomActivity extends AppCompatActivity
         db.delete(MyOpener.TABLE_NAME, MyOpener.COL_ID + "= ?", new String[] {Long.toString(c.getId())});
     }
 
+    protected void printCursor( Cursor c, int version)
+    {
+        Log.e("version", Integer.toString(version));
+        Log.e("Column Quantity", Integer.toString(c.getColumnCount()));
+        Log.e("Column Name", c.getColumnName(1));
+        Log.e("Row Quantity", Integer.toString(c.getCount()));
+
+        while(!(c.isAfterLast()))
+        {
+            c.moveToNext();
+            String index = c.getString( c.getColumnIndex(MyOpener.COL_ID));
+            String sender = c.getString( c.getColumnIndex(MyOpener.COL_SENDER));
+            String message = c.getString( c.getColumnIndex(MyOpener.COL_MESSAGE));
+
+            String mesg = "index: " + index + " from: " + sender + " message: " + message;
+
+            Log.e("Row", mesg);
+        }
+
+    }
 }
