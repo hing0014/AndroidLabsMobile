@@ -3,6 +3,8 @@ package com.example.androidlabs;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,19 +21,23 @@ public class ChatRoomActivity extends AppCompatActivity
 {
     private ArrayList<Message> elements = new ArrayList<>();
     private MyListAdapter myAdapter;
+    SQLiteDatabase db;
+    long msgCount = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
-
         ListView myList = findViewById(R.id.theListView);
+        loadDataFromDatabase();
         myList.setAdapter(myAdapter = new MyListAdapter());
 
         Button sendButton = findViewById(R.id.send);
         sendButton.setOnClickListener( click -> {
-            TextView textView = (TextView) findViewById(R.id.message);
+            TextView textView = findViewById(R.id.message);
             String messageText = textView.getText().toString();
-            Message message = new Message("send", messageText);
+            ++msgCount;
+            Message message = new Message("send", messageText, msgCount);
             elements.add(message);
             myAdapter.notifyDataSetChanged();
             textView.setText("");
@@ -39,9 +45,10 @@ public class ChatRoomActivity extends AppCompatActivity
 
         Button recButton = findViewById(R.id.receive);
         recButton.setOnClickListener( click -> {
-            TextView textView = (TextView) findViewById(R.id.message);
+            TextView textView = findViewById(R.id.message);
             String messageText = textView.getText().toString();
-            Message message = new Message("receive", messageText);
+            ++msgCount;
+            Message message = new Message("receive", messageText, msgCount);
             elements.add(message);
             myAdapter.notifyDataSetChanged();
             textView.setText("");
@@ -63,7 +70,7 @@ public class ChatRoomActivity extends AppCompatActivity
 
         public Object getItem(int position){return position;}
 
-        public long getItemId(int position) { return (long) position; }
+        public long getItemId(int position) { return position; }
 
         public View getView(int position, View old, ViewGroup parent)
         {
@@ -90,11 +97,14 @@ public class ChatRoomActivity extends AppCompatActivity
     {
         String message;
         String type;
+        long id;
 
-        private Message(String type, String message)
+        private Message(String type, String message, long i)
         {
-            setMessage(message);
-            setType(type);
+            this.message = message;
+            this.type = type;
+            this.id = i;
+
         }
 
         public String getMessage()
@@ -105,13 +115,41 @@ public class ChatRoomActivity extends AppCompatActivity
         {
             return type;
         }
-        private void setMessage(String message)
+        public long getId()
         {
-            this.message = message;
+            return id;
         }
-        private void setType(String type)
+    }
+
+    private void loadDataFromDatabase()
+    {
+        //get a database connection:
+        MyOpener dbOpener = new MyOpener(this);
+        db = dbOpener.getWritableDatabase(); //This calls onCreate() if you've never built the table before, or onUpgrade if the version here is newer
+
+
+        // We want to get all of the columns. Look at MyOpener.java for the definitions:
+        String [] columns = {MyOpener.COL_ID, MyOpener.COL_MESSAGE, MyOpener.COL_SENDER};
+        //query all the results from the database:
+        Cursor results = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
+
+        //Now the results object has rows of results that match the query.
+        //find the column indices:
+        int messageColumnIndex = results.getColumnIndex(MyOpener.COL_MESSAGE);
+        int senderColIndex = results.getColumnIndex(MyOpener.COL_SENDER);
+        int idColIndex = results.getColumnIndex(MyOpener.COL_ID);
+
+        //iterate over the results, return true if there is a next item:
+        while(results.moveToNext())
         {
-            this.type = type;
+            String message = results.getString(messageColumnIndex);
+            String sender = results.getString(senderColIndex);
+            long id = results.getLong(idColIndex);
+
+            //add the new Contact to the array list:
+            elements.add(new Message(message, sender, id));
         }
+
+        //At this point, the contactsList array has loaded every row from the cursor.
     }
 }
