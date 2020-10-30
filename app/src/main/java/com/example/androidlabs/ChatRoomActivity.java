@@ -172,7 +172,7 @@ public class ChatRoomActivity extends AppCompatActivity
     {
         Log.e("version", Integer.toString(version));
         Log.e("Column Quantity", Integer.toString(c.getColumnCount()));
-        Log.e("Column Name", c.getColumnName(1));
+        Log.e("Column Names", c.getColumnName(0) + " " + c.getColumnName(1) + " " + c.getColumnName(2));
         Log.e("Row Quantity", Integer.toString(c.getCount()));
 
         while(!(c.isAfterLast()))
