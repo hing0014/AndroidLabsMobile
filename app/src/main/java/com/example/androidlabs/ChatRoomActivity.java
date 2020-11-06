@@ -24,6 +24,7 @@ public class ChatRoomActivity extends AppCompatActivity
     private ArrayList<Message> elements = new ArrayList<>();
     private MyListAdapter myAdapter;
     SQLiteDatabase db;
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class ChatRoomActivity extends AppCompatActivity
 
         Button sendButton = findViewById(R.id.send);
         sendButton.setOnClickListener( click -> {
+            ++count;
             TextView textView = findViewById(R.id.message);
             String messageText = textView.getText().toString();
             ContentValues newRowValues = new ContentValues();
@@ -62,7 +64,7 @@ public class ChatRoomActivity extends AppCompatActivity
 
         myList.setOnItemClickListener( (parent, view, pos, id) -> {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle(getResources().getString(R.string.do_delete)).setMessage(getResources().getString(R.string.desc1) + pos + getResources().getString(R.string.desc2) + id)
+            alertDialogBuilder.setTitle(getResources().getString(R.string.do_delete)).setMessage(getResources().getString(R.string.desc1) + pos + "\n" + getResources().getString(R.string.desc2) + getDatabaseID(pos))
                     .setPositiveButton("Yes", (click, arg) ->
                     {
                         Message selectedContact = elements.get(pos);
@@ -138,8 +140,6 @@ public class ChatRoomActivity extends AppCompatActivity
         //get a database connection:
         MyOpener dbOpener = new MyOpener(this);
         db = dbOpener.getWritableDatabase(); //This calls onCreate() if you've never built the table before, or onUpgrade if the version here is newer
-
-
         // We want to get all of the columns. Look at MyOpener.java for the definitions:
         String [] columns = {MyOpener.COL_ID, MyOpener.COL_MESSAGE, MyOpener.COL_SENDER};
         //query all the results from the database:
@@ -170,10 +170,10 @@ public class ChatRoomActivity extends AppCompatActivity
 
     protected void printCursor( Cursor c, int version)
     {
-        Log.e("version", Integer.toString(version));
-        Log.e("Column Quantity", Integer.toString(c.getColumnCount()));
-        Log.e("Column Names", c.getColumnName(0) + " " + c.getColumnName(1) + " " + c.getColumnName(2));
-        Log.e("Row Quantity", Integer.toString(c.getCount()));
+        Log.d("version", Integer.toString(version));
+        Log.d("Column Quantity", Integer.toString(c.getColumnCount()));
+        Log.d("Column Names", c.getColumnName(0) + " " + c.getColumnName(1) + " " + c.getColumnName(2));
+        Log.d("Row Quantity", Integer.toString(c.getCount()));
 
         while(c.moveToNext())
         {
@@ -183,8 +183,27 @@ public class ChatRoomActivity extends AppCompatActivity
 
             String mesg = "index: " + index + " from: " + sender + " message: " + message;
 
-            Log.e("Row", mesg);
+            Log.d("Row", mesg);
         }
         c.moveToPosition(-1);
+    }
+
+    private long getDatabaseID(int id)
+    {
+        MyOpener dbOpener = new MyOpener(this);
+        db = dbOpener.getWritableDatabase();
+        String [] columns = {MyOpener.COL_ID, MyOpener.COL_MESSAGE, MyOpener.COL_SENDER};
+        Cursor results = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
+        printCursor(results, db.getVersion());
+        int idColIndex = results.getColumnIndex(MyOpener.COL_ID);
+
+        int i = 0;
+        long ido = -1;
+        while(results.moveToNext())
+        {
+            if(i == id) ido = results.getLong(idColIndex);
+            i++;
+        }
+        return ido;
     }
 }
