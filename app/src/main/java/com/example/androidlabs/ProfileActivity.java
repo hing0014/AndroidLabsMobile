@@ -68,7 +68,6 @@ public class ProfileActivity extends AppCompatActivity {
         super.onPause();
         saveSharedPrefs(typeField.getText().toString());
         Log.e(ACTIVITY_NAME, "In function:" + "onPause");
-
     }
 
     @Override
