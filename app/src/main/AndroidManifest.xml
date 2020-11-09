@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/custom"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".WeatherForecast"></activity>
         <activity android:name=".ChatRoomActivity" />
         <activity android:name=".ProfileActivity" /> <!-- <intent-filter> -->
         <!-- <action android:name="android.intent.action.MAIN" /> -->
