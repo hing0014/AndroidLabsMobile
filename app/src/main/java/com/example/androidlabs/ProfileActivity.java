@@ -116,6 +116,4 @@ public class ProfileActivity extends AppCompatActivity {
         }
         Log.e(ACTIVITY_NAME, "In function:" + "onActivityResult");
     }
-
-
 }
