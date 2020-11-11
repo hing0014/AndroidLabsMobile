@@ -31,4 +31,9 @@
     <string name="desc1">La ligne sélectionnée est: </string>
     <string name="desc2">L\'ID de la base de données est: </string>
     <string name="goToWeather">Météo</string>
+    <string name="current_temperature">Température actuelle</string>
+    <string name="currentWeather">Météo actuelle</string>
+    <string name="min_temperature">Température min</string>
+    <string name="max_temperature">Température maximale</string>
+    <string name="UV_Rating">Évaluation UV</string>
 </resources>

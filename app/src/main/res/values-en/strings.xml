@@ -31,4 +31,9 @@
     <string name="desc1">The selected row is: </string>
     <string name="desc2">The database id is: </string>
     <string name="goToWeather">Weather</string>
+    <string name="current_temperature">Current Temperature</string>
+    <string name="currentWeather">Current Weather</string>
+    <string name="min_temperature">Min Temperature</string>
+    <string name="max_temperature">Max Temperature</string>
+    <string name="UV_Rating">UV Rating</string>
 </resources>

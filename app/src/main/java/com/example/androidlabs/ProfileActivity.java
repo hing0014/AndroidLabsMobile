@@ -17,39 +17,39 @@ import android.widget.LinearLayout;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private EditText email;
-    private LinearLayout layout;
     private SharedPreferences prefs = null;
-    private String savedEmail;
     private EditText typeField;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
     private ImageView mImageButton;
-    private Intent fromMain;
-    private Button bu;
     private Intent goToChatRoom;
+    private Intent goToWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        email = findViewById(R.id.email);
+        EditText email = findViewById(R.id.email);
         prefs = getSharedPreferences("file", Context.MODE_PRIVATE);
-        savedEmail = prefs.getString("email", "");
+        String savedEmail = prefs.getString("email", "");
         typeField = email;
         typeField.setText(savedEmail);
 
         mImageButton = findViewById(R.id.pictureButton);
         mImageButton.setOnClickListener(bt -> dispatchTakePictureIntent());
 
-        fromMain = getIntent();
+        Intent fromMain = getIntent();
         fromMain.getStringExtra("email");
         Log.e(ACTIVITY_NAME, "In function:" + "onCreate");
 
-        bu = findViewById(R.id.goToChat);
+        Button bu = findViewById(R.id.goToChat);
         bu.setOnClickListener(bt -> startActivity(goToChatRoom));
         goToChatRoom = new Intent(ProfileActivity.this, ChatRoomActivity.class);
+
+        Button weatherBut = findViewById(R.id.goToWeather);
+        weatherBut.setOnClickListener(bt -> startActivity(goToWeather));
+        goToWeather = new Intent(ProfileActivity.this, WeatherForecast.class);
     }
 
     @Override
