@@ -148,7 +148,7 @@ public class WeatherForecast extends AppCompatActivity
                 outputStream.flush();
                 outputStream.close();
                 FileInputStream fis = null;
-                try {    fis = openFileInput(image);   }
+                try {    fis = openFileInput(String.valueOf(image));   }
                 catch (FileNotFoundException e) {    e.printStackTrace();  }
                 Bitmap bm = BitmapFactory.decodeStream(fis);
             } catch (Exception ignored)
