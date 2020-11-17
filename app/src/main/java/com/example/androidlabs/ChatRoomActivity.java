@@ -73,17 +73,6 @@ public class ChatRoomActivity extends AppCompatActivity
         });
 
         myList.setOnItemClickListener( (parent, view, pos, id) -> {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle(getResources().getString(R.string.do_delete)).setMessage(getResources().getString(R.string.desc1) + pos + "\n" + getResources().getString(R.string.desc2) + getDatabaseID(pos))
-                    .setPositiveButton("Yes", (click, arg) ->
-                    {
-                        Message selectedContact = elements.get(pos);
-                        deleteContact(selectedContact);
-                        elements.remove(pos);
-                        myAdapter.notifyDataSetChanged();
-                    })
-                    .setNegativeButton("No", (click, arg) -> {  })
-                    .create().show();
             Bundle dataToPass = new Bundle();
             Message temp = elements.get(pos);
             dataToPass.putString(ITEM_MESSAGE, temp.getMessage() );
@@ -101,10 +90,23 @@ public class ChatRoomActivity extends AppCompatActivity
             }
             else //isPhone
             {
-                Intent nextActivity = new Intent(ChatRoomActivity.this, DetailsFragment.class);
+                Intent nextActivity = new Intent(ChatRoomActivity.this, EmptyActivity.class);
                 nextActivity.putExtras(dataToPass); //send data to next activity
                 startActivity(nextActivity); //make the transition
             }
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle(getResources().getString(R.string.do_delete)).setMessage(getResources().getString(R.string.desc1) + pos + "\n" + getResources().getString(R.string.desc2) + getDatabaseID(pos))
+                    .setPositiveButton("Yes", (click, arg) ->
+                    {
+                        Message selectedContact = elements.get(pos);
+                        deleteContact(selectedContact);
+                        elements.remove(pos);
+                        myAdapter.notifyDataSetChanged();
+                    })
+                    .setNegativeButton("No", (click, arg) -> {  })
+                    .create().show();
+
         }   );
     }
 
