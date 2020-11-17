@@ -28,6 +28,7 @@
         <activity android:name=".WeatherForecast" />
 <!--        <activity android:name=".ChatRoomActivity" />-->
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".EmptyActivity" />
         </application>
 
     </manifest>
