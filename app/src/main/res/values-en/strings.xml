@@ -36,4 +36,9 @@
     <string name="min_temperature">Min Temperature</string>
     <string name="max_temperature">Max Temperature</string>
     <string name="UV_Rating">UV Rating</string>
+    <string name="messageHere">Message Here</string>
+    <string name="IDis">ID=</string>
+    <string name="isASend">Is a Send Message</string>
+    <string name="isARecieve" >Is a Receive Message</string>
+    <string name="hide">HIDE</string>
 </resources>

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,11 +27,19 @@ public class ChatRoomActivity extends AppCompatActivity
     private MyListAdapter myAdapter;
     SQLiteDatabase db;
     int count = 0;
+    boolean isTablet = false;
+    public static final String ITEM_MESSAGE = "MESSAGE";
+    public static final String ITEM_TYPE = "TYPE";
+    public static final String ITEM_ID = "ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
+
+        FrameLayout frame = findViewById(R.id.frame);
+        if(frame != null) isTablet = true;
+
         ListView myList = findViewById(R.id.theListView);
         loadDataFromDatabase();
         myList.setAdapter(myAdapter = new MyListAdapter());
@@ -63,6 +73,29 @@ public class ChatRoomActivity extends AppCompatActivity
         });
 
         myList.setOnItemClickListener( (parent, view, pos, id) -> {
+
+            Bundle dataToPass = new Bundle();
+            Message temp = elements.get(pos);
+            dataToPass.putString(ITEM_MESSAGE, temp.getMessage() );
+            dataToPass.putString(ITEM_TYPE, temp.getType());
+            dataToPass.putLong(ITEM_ID, temp.getId());
+
+            if(isTablet)
+            {
+                DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
+                dFragment.setArguments( dataToPass ); //pass it a bundle for information
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frame, dFragment) //Add the fragment in FrameLayout
+                        .commit(); //actually load the fragment. Calls onCreate() in DetailFragment
+            }
+            else //isPhone
+            {
+                Intent nextActivity = new Intent(ChatRoomActivity.this, DetailsFragment.class);
+                nextActivity.putExtras(dataToPass); //send data to next activity
+                startActivity(nextActivity); //make the transition
+            }
+
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(getResources().getString(R.string.do_delete)).setMessage(getResources().getString(R.string.desc1) + pos + "\n" + getResources().getString(R.string.desc2) + getDatabaseID(pos))
                     .setPositiveButton("Yes", (click, arg) ->
@@ -107,7 +140,7 @@ public class ChatRoomActivity extends AppCompatActivity
         }
     }
 
-    private static class Message
+    static class Message
     {
         String message;
         String type;
