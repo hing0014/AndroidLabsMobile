@@ -94,6 +94,9 @@ public class ChatRoomActivity extends AppCompatActivity
                 nextActivity.putExtras(dataToPass); //send data to next activity
                 startActivity(nextActivity); //make the transition
             }
+        });
+
+        myList.setOnItemLongClickListener( (parent, view, pos, id) -> {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(getResources().getString(R.string.do_delete)).setMessage(getResources().getString(R.string.desc1) + pos + "\n" + getResources().getString(R.string.desc2) + getDatabaseID(pos))
@@ -106,8 +109,8 @@ public class ChatRoomActivity extends AppCompatActivity
                     })
                     .setNegativeButton("No", (click, arg) -> {  })
                     .create().show();
-
-        }   );
+            return true;
+        });
     }
 
     private class MyListAdapter extends BaseAdapter
