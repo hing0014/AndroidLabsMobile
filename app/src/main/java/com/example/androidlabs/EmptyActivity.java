@@ -1,11 +1,9 @@
 package com.example.androidlabs;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
 
 public class EmptyActivity extends AppCompatActivity {
 

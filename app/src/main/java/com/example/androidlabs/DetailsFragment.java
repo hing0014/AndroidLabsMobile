@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,7 +28,6 @@ import java.util.Arrays;
 public class DetailsFragment extends Fragment
 {
     private AppCompatActivity parentActivity;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -56,6 +56,11 @@ public class DetailsFragment extends Fragment
         finishButton.setOnClickListener( clk -> {
             //Tell the parent activity to remove
             parentActivity.getSupportFragmentManager().beginTransaction().remove(this).commit();
+            if(!ChatRoomActivity.isTablet)
+            {
+                parentActivity.onBackPressed();
+            }
+
         });
 
         return result;

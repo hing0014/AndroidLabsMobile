@@ -27,7 +27,7 @@ public class ChatRoomActivity extends AppCompatActivity
     private MyListAdapter myAdapter;
     SQLiteDatabase db;
     int count = 0;
-    boolean isTablet = false;
+    public static boolean isTablet = false;
     public static final String ITEM_MESSAGE = "MESSAGE";
     public static final String ITEM_TYPE = "TYPE";
     public static final String ITEM_ID = "ID";
