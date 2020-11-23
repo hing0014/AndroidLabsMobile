@@ -11,12 +11,10 @@
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
-        android:icon="@mipmap/custom"
-        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/custom"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".TestToolbar" />
+        android:theme="@style/AppTheme">
         <!-- <action android:name="android.intent.action.MAIN" /> -->
         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
         <!-- </intent-filter> -->
@@ -31,6 +29,7 @@
         <activity android:name=".ChatRoomActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".EmptyActivity" />
+        <activity android:name=".TestToolbar" />
     </application>
 
 </manifest>

@@ -2,31 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <item android:id="@+id/item1"
-        android:title="@string/lab_eight"
+    <item android:id="@+id/backToLog"
+        android:title="@string/backToLogin"
         android:icon="@drawable/custom"
         android:orderInCategory="100"
         app:showAsAction="always"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
 
+    <item android:id="@+id/fight"
+        android:icon="@drawable/mma"
+        android:title="@string/fight"
+        app:showAsAction="always"
+        android:orderInCategory="200"/> <!-- This uses showAsAction=never, so look at title= parameter -->
+
+    <item android:id="@+id/virtReal"
+        android:icon="@drawable/vr_glasses"
+        android:orderInCategory="300"
+        app:showAsAction="always"
+        android:title="@string/the_future"/>
 
     <item android:id="@+id/search_item"
-        android:orderInCategory="50"
+        android:orderInCategory="400"
         app:actionViewClass="android.widget.SearchView"
-        android:icon="@drawable/magnifyingglass"
         app:showAsAction="ifRoom|collapseActionView"
         android:title="@string/search"/>    <!-- This uses showAsAction=always, so look at icon= parameter -->
 
-
-    <item android:id="@+id/help_item"
-        android:icon="@drawable/MMA"
-        android:title="@string/fight"
-        app:showAsAction="always"
-        android:orderInCategory="400"/> <!-- This uses showAsAction=never, so look at title= parameter -->
-
-    <item android:id="@+id/mail"
-        android:icon="@drawable/vr_glasses"
-        android:orderInCategory="75"
-        app:showAsAction="always"
-        android:title="@string/the_future"/>
 </menu>
