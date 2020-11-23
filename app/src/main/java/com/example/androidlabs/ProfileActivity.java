@@ -24,6 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView mImageButton;
     private Intent goToChatRoom;
     private Intent goToWeather;
+    private Intent goToToolB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +45,16 @@ public class ProfileActivity extends AppCompatActivity {
         Log.e(ACTIVITY_NAME, "In function:" + "onCreate");
 
         Button bu = findViewById(R.id.goToChat);
-        bu.setOnClickListener(bt -> startActivity(goToChatRoom));
         goToChatRoom = new Intent(ProfileActivity.this, ChatRoomActivity.class);
+        bu.setOnClickListener(bt -> startActivity(goToChatRoom));
 
         Button weatherBut = findViewById(R.id.goToWeather);
-        weatherBut.setOnClickListener(bt -> startActivity(goToWeather));
         goToWeather = new Intent(ProfileActivity.this, WeatherForecast.class);
+        weatherBut.setOnClickListener(bt -> startActivity(goToWeather));
+
+        Button goToTool = findViewById(R.id.goToToolbar);
+        goToToolB = new Intent(ProfileActivity.this, TestToolbar.class);
+        goToTool.setOnClickListener(bt -> startActivity(goToToolB));
     }
 
     @Override

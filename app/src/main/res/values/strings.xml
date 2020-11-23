@@ -40,6 +40,7 @@
     <string name="messageHere">Message Here</string>
     <string name="IDis">ID=</string>
     <string name="isASend">Is a Send Message</string>
-    <string name="isARecieve" >Is a Receive Message</string>
+    <string name="isARecieve">Is a Receive Message</string>
     <string name="hide">HIDE</string>
+    <string name="GoToToolbar">Go To Toolbar Page</string>
 </resources>

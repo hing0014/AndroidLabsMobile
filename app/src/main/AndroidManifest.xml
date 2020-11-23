@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.androidlabs">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -14,6 +16,7 @@
         android:roundIcon="@mipmap/custom"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".TestToolbar"></activity>
         <!-- <action android:name="android.intent.action.MAIN" /> -->
         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
         <!-- </intent-filter> -->
@@ -23,12 +26,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-<!--        <activity android:name=".MainActivity"/>-->
+        </activity> <!-- <activity android:name=".MainActivity"/> -->
         <activity android:name=".WeatherForecast" />
         <activity android:name=".ChatRoomActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".EmptyActivity" />
-        </application>
+    </application>
 
-    </manifest>
+</manifest>

@@ -41,4 +41,5 @@
     <string name="isASend">Est un message d\'envoi</string>
     <string name="isARecieve" >Est un message de réception</string>
     <string name="hide">CACHER</string>
+    <string name="GoToToolbar">Page de la barre d\'outils</string>
 </resources>

@@ -71,6 +71,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/goToWeather" />
+        <Button
+            android:id="@+id/goToToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/GoToToolbar" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
