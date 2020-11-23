@@ -4,8 +4,8 @@
 
 
     <item android:id="@+id/item1"
-        android:title="@string/Name"
-        android:icon="@drawable/freeicon"
+        android:title="@string/lab_eight"
+        android:icon="@drawable/custom"
         android:orderInCategory="100"
         app:showAsAction="always"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
 
@@ -13,20 +13,20 @@
     <item android:id="@+id/search_item"
         android:orderInCategory="50"
         app:actionViewClass="android.widget.SearchView"
-        android:icon="@android:drawable/ic_search_category_default"
-        app:showAsAction="always|collapseActionView"
+        android:icon="@drawable/magnifyingglass"
+        app:showAsAction="ifRoom|collapseActionView"
         android:title="@string/search"/>    <!-- This uses showAsAction=always, so look at icon= parameter -->
 
 
     <item android:id="@+id/help_item"
-        android:icon="@drawable/global"
-        android:title="Look at globe"
-        app:showAsAction="never"
+        android:icon="@drawable/MMA"
+        android:title="@string/fight"
+        app:showAsAction="always"
         android:orderInCategory="400"/> <!-- This uses showAsAction=never, so look at title= parameter -->
 
     <item android:id="@+id/mail"
-        android:icon="@drawable/mail"
+        android:icon="@drawable/vr_glasses"
         android:orderInCategory="75"
         app:showAsAction="always"
-        android:title="Not used, since showAsAction=always"/>
+        android:title="@string/the_future"/>
 </menu>

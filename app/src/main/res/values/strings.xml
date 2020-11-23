@@ -43,4 +43,9 @@
     <string name="isARecieve">Is a Receive Message</string>
     <string name="hide">HIDE</string>
     <string name="GoToToolbar">Go To Toolbar Page</string>
+    <string name="search">Search</string>
+    <string name="lab_eight">Lab Eight</string>
+    <string name="fight">FIGHT</string>
+    <string name="version">Version 1.0</string>
+    <string name="the_future">THE FUTURE</string>
 </resources>

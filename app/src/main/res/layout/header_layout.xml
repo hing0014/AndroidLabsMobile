@@ -7,16 +7,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello world"
-        android:layout_alignParentBottom="true" />
+        android:text="@string/lab_eight" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Version"
-        android:layout_alignParentBottom="true" />
+        android:text="@string/version" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name"
-        android:layout_alignParentBottom="true" />
+        android:text="@string/lab_eight" />
 </LinearLayout>

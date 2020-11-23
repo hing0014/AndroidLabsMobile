@@ -1,4 +1,4 @@
-package com.example.androidlabs;
+package com.example.AndroidLabs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,9 +11,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 public class ProfileActivity extends AppCompatActivity {
 

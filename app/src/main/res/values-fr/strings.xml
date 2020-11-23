@@ -42,4 +42,9 @@
     <string name="isARecieve" >Est un message de réception</string>
     <string name="hide">CACHER</string>
     <string name="GoToToolbar">Page de la barre d\'outils</string>
+    <string name="search">Chercher</string>
+    <string name="lab_eight">Laboratoire huit</string>
+    <string name="fight">BATS TOI</string>
+    <string name="version">Version 1.0</string>
+    <string name="the_future">L\'AVENIR</string>
 </resources>
