@@ -1,0 +1,177 @@
+Index: app/src/main/res/layout/activity_profile.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".ProfileActivity\">\r\n    <LinearLayout\r\n        android:id=\"@+id/layout\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\"\r\n        tools:ignore=\"UseSwitchCompatOrMaterialXml\">\r\n\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"@string/your_profile\"\r\n            />\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"@string/your_name\"\r\n            />\r\n        <EditText\r\n            android:id=\"@+id/name\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"@string/type_name_here\"\r\n            android:inputType=\"textPersonName\"\r\n            android:autofillHints=\"@string/type_name_here\"\r\n            />\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"@string/your_email\"\r\n            />\r\n        <EditText\r\n            android:id=\"@+id/email\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:autofillHints=\"@string/type_here\"\r\n            android:hint=\"@string/type_email_here\"\r\n            android:inputType=\"textEmailAddress\"\r\n            />\r\n        <TextView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"@string/your_picture\"\r\n        />\r\n\r\n        <androidx.appcompat.widget.AppCompatImageButton\r\n            android:id=\"@+id/pictureButton\"\r\n            android:src=\"@android:drawable/picture_frame\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            />\r\n\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"@string/click_above\"\r\n            />\r\n        <Button\r\n            android:id=\"@+id/goToChat\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"@string/goToChat\" />\r\n        <Button\r\n            android:id=\"@+id/goToWeather\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"@string/goToWeather\" />\r\n\r\n    </LinearLayout>\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_profile.xml	(revision 58877c61d1d72f21883b0e26e4a06adcac243c6a)
++++ app/src/main/res/layout/activity_profile.xml	(date 1606091011705)
+@@ -71,6 +71,11 @@
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="@string/goToWeather" />
++        <Button
++            android:id="@+id/GoToToolbarPage"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:text="@string/GoToToolbar" />
+ 
+     </LinearLayout>
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/androidlabs/WeatherForecast.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.androidlabs;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Context;\r\nimport android.graphics.Bitmap;\r\nimport android.graphics.BitmapFactory;\r\nimport android.os.AsyncTask;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.BaseAdapter;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageButton;\r\nimport android.widget.ImageView;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.TextView;\r\n\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\nimport org.xmlpull.v1.XmlPullParser;\r\nimport org.xmlpull.v1.XmlPullParserFactory;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.File;\r\nimport java.io.FileInputStream;\r\nimport java.io.FileNotFoundException;\r\nimport java.io.FileOutputStream;\r\nimport java.io.IOException;\r\nimport java.io.InputStream;\r\nimport java.io.InputStreamReader;\r\nimport java.io.UnsupportedEncodingException;\r\nimport java.net.HttpURLConnection;\r\nimport java.net.MalformedURLException;\r\nimport java.net.URL;\r\nimport java.nio.charset.StandardCharsets;\r\n\r\npublic class WeatherForecast extends AppCompatActivity\r\n{\r\n    private ProgressBar weatherBar;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState)\r\n    {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_weather_forecast);\r\n        weatherBar = findViewById(R.id.indeterminateBar);\r\n        weatherBar.setVisibility(View.VISIBLE);\r\n        String iconName;\r\n        ForecastQuery forecast = new ForecastQuery();\r\n        forecast.execute(\"http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=7e943c97096a9784391a981c4d878b22&mode=xml&units=metric\", \"http://api.openweathermap.org/data/2.5/uvi?appid=7e943c97096a9784391a981c4d878b22&lat=45.348945&lon=-75.759389\", \"http://openweathermap.org/img/w/\");  //Type 1\r\n    }\r\n\r\n    private class ForecastQuery extends AsyncTask<String, Integer, String>\r\n    {\r\n        String currentTemperature;\r\n        String min;\r\n        String max;\r\n        double UV;\r\n        String iconName;\r\n        Bitmap image = null;\r\n\r\n        //Type 1\r\n        @Override\r\n        protected String doInBackground(String... debates)\r\n        {\r\n            try\r\n            {\r\n                //create a URL object of what server to contact:\r\n                URL url = new URL(debates[0]);\r\n                //open the connection\r\n                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();\r\n                //wait for data:\r\n                InputStream response = urlConnection.getInputStream();\r\n                //From part 3: slide 19\r\n                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();\r\n                factory.setNamespaceAware(false);\r\n                XmlPullParser xpp = factory.newPullParser();\r\n                xpp.setInput( response  , \"UTF-8\");\r\n                //From part 3, slide 20\r\n                int eventType = xpp.getEventType(); //The parser is currently at START_DOCUMENT\r\n                while(eventType != XmlPullParser.END_DOCUMENT)\r\n                {\r\n                    if(eventType == XmlPullParser.START_TAG)\r\n                    {\r\n                        //If you get here, then you are pointing at a start tag\r\n                        if(xpp.getName().equals(\"temperature\"))\r\n                        {\r\n                            //If you get here, then you are pointing to a <Weather> start tag\r\n                            currentTemperature = xpp.getAttributeValue(null,    \"value\");\r\n                            publishProgress(20);\r\n                            min = xpp.getAttributeValue(null, \"min\");\r\n                            publishProgress(40);\r\n                            max = xpp.getAttributeValue(null, \"max\");\r\n                            publishProgress(60);\r\n                        }\r\n                        else if(xpp.getName().equals(\"weather\"))\r\n                        {\r\n                            //If you get here, then you are pointing to a <Weather> start tag\r\n                            iconName = xpp.getAttributeValue(null,    \"icon\");\r\n                            publishProgress(70);\r\n                        }\r\n                    }\r\n                    eventType = xpp.next(); //move to the next xml event and store it in a variable\r\n                }\r\n            }\r\n            catch (Exception ignored)\r\n            {\r\n\r\n            }\r\n\r\n            try\r\n            {\r\n                URL url = new URL(debates[1]);\r\n                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();\r\n                InputStream response = urlConnection.getInputStream();\r\n                BufferedReader reader = new BufferedReader(new InputStreamReader(response, StandardCharsets.UTF_8), 8);\r\n                StringBuilder sb = new StringBuilder();\r\n                String line = null;\r\n                while ((line = reader.readLine()) != null)\r\n                {\r\n                    sb.append(line).append(\"\\n\");\r\n                }\r\n                String result = sb.toString();\r\n                JSONObject jObject = new JSONObject(result);\r\n                UV = jObject.getDouble(\"value\");\r\n                publishProgress(80);\r\n            }\r\n            catch (Exception ignored)\r\n            {\r\n\r\n            }\r\n\r\n            try\r\n            {\r\n                URL url = new URL(debates[2] + iconName + \".png\");\r\n                HttpURLConnection connection = (HttpURLConnection) url.openConnection();\r\n                connection.connect();\r\n                int responseCode = connection.getResponseCode();\r\n                if (responseCode == 200)\r\n                {\r\n                    image = BitmapFactory.decodeStream(connection.getInputStream());\r\n                }\r\n\r\n                FileOutputStream outputStream = openFileOutput( iconName + \".png\", Context.MODE_PRIVATE);\r\n                image.compress(Bitmap.CompressFormat.PNG, 80, outputStream);\r\n                outputStream.flush();\r\n                outputStream.close();\r\n                FileInputStream fis = null;\r\n                try {    fis = openFileInput(String.valueOf(image));   }\r\n                catch (FileNotFoundException e) {    e.printStackTrace();  }\r\n                Bitmap bm = BitmapFactory.decodeStream(fis);\r\n            } catch (Exception ignored)\r\n            {\r\n\r\n            }\r\n\r\n            return \"Done\";\r\n        }\r\n\r\n        //Type 2\r\n        public void onProgressUpdate(Integer...value)\r\n        {\r\n            weatherBar.setProgress(value[0]);\r\n            Log.i(\"Progress\", \"Progress is :\" + value[0] + \"%\");\r\n        }\r\n        //Type3\r\n        public void onPostExecute(String fromDoInBackground)\r\n        {\r\n            TextView currentTemperatureET = findViewById(R.id.current_temperature);\r\n            TextView minET = findViewById(R.id.min_temperature);\r\n            TextView maxET = findViewById(R.id.max_temperature);\r\n            TextView UVET = findViewById(R.id.UV_Rating);\r\n            ProgressBar weatherBar = findViewById(R.id.indeterminateBar);\r\n\r\n            currentTemperatureET.setText(currentTemperature);\r\n            minET.setText(min);\r\n            maxET.setText(max);\r\n            maxET.setText(max);\r\n            UVET.setText(String.valueOf(UV));\r\n            weatherBar.setVisibility(View.INVISIBLE);\r\n            Log.i(\"HTTP\", fromDoInBackground);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/androidlabs/WeatherForecast.java	(revision 58877c61d1d72f21883b0e26e4a06adcac243c6a)
++++ app/src/main/java/com/example/androidlabs/WeatherForecast.java	(date 1606090587787)
+@@ -105,7 +105,7 @@
+                     eventType = xpp.next(); //move to the next xml event and store it in a variable
+                 }
+             }
+-            catch (Exception ignored)
++            catch (Exception e)
+             {
+ 
+             }
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <string name=\"empty\"> </string>\r\n    <string name=\"app_name\">AndroidLabs</string>\r\n    <string name=\"hello_message\">Look at my GUI</string>\r\n    <string name=\"ButtonText\">LOGIN</string>\r\n    <string name=\"CheckText\">Check this out!</string>\r\n    <string name=\"toast_message\">Here is more information</string>\r\n    <string name=\"snack_line\">The switch is now </string>\r\n    <string name=\"type_here\">Type here</string>\r\n    <string name=\"switch_on_off\">Switch On/Off</string>\r\n    <string name=\"switch_on\">The switch is now on</string>\r\n    <string name=\"switch_off\">The switch is now off</string>\r\n    <string name=\"flag\">Canadian Flag</string>\r\n    <string name=\"undo\">Undo</string>\r\n    <string name=\"emailPrompt\">Enter your email address:</string>\r\n    <string name=\"type_email_here\">Type email here</string>\r\n    <string name=\"enter_password_text\">Type your password:</string>\r\n    <string name=\"your_profile\">Your profile</string>\r\n    <string name=\"your_name\">Your name:</string>\r\n    <string name=\"type_name_here\">Enter your name</string>\r\n    <string name=\"your_email\">Your email:</string>\r\n    <string name=\"your_picture\">Your picture:</string>\r\n    <string name=\"click_above\">Click the button above to take a picture.</string>\r\n    <string name=\"goToChat\">Go To Chat</string>\r\n    <string name=\"send\">SEND</string>\r\n    <string name=\"receive\">RECEIVE</string>\r\n    <string name=\"receiveIcon\">Harley Quinn</string>\r\n    <string name=\"sendIcon\">The Joker</string>\r\n    <string name=\"do_delete\">Do you want to delete this?</string>\r\n    <string name=\"desc1\">The selected row is: </string>\r\n    <string name=\"desc2\">The database id is: </string>\r\n    <string name=\"goToWeather\">Weather</string>\r\n    <string name=\"currentWeather\">Current Weather</string>\r\n    <string name=\"current_temperature\">Current Temperature</string>\r\n    <string name=\"min_temperature\">Min Temperature</string>\r\n    <string name=\"max_temperature\">Max Temperature</string>\r\n    <string name=\"UV_Rating\">UV Rating</string>\r\n    <!-- TODO: Remove or change this placeholder text -->\r\n    <string name=\"messageHere\">Message Here</string>\r\n    <string name=\"IDis\">ID=</string>\r\n    <string name=\"isASend\">Is a Send Message</string>\r\n    <string name=\"isARecieve\" >Is a Receive Message</string>\r\n    <string name=\"hide\">HIDE</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 58877c61d1d72f21883b0e26e4a06adcac243c6a)
++++ app/src/main/res/values/strings.xml	(date 1606091048971)
+@@ -40,6 +40,7 @@
+     <string name="messageHere">Message Here</string>
+     <string name="IDis">ID=</string>
+     <string name="isASend">Is a Send Message</string>
+-    <string name="isARecieve" >Is a Receive Message</string>
++    <string name="isARecieve">Is a Receive Message</string>
+     <string name="hide">HIDE</string>
++    <string name="GoToToolbar" >GoTo Toolbar Page</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/example/androidlabs/TestToolbar.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/androidlabs/TestToolbar.java	(date 1606090918326)
++++ app/src/main/java/com/example/androidlabs/TestToolbar.java	(date 1606090918326)
+@@ -0,0 +1,14 @@
++package com.example.androidlabs;
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import android.os.Bundle;
++
++public class TestToolbar extends AppCompatActivity {
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_test_toolbar);
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_test_toolbar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_test_toolbar.xml	(date 1606090918272)
++++ app/src/main/res/layout/activity_test_toolbar.xml	(date 1606090918272)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".TestToolbar">
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/values-en/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <string name=\"empty\"> </string>\r\n    <string name=\"app_name\">AndroidLabs</string>\r\n    <string name=\"hello_message\">Look at my GUI</string>\r\n    <string name=\"ButtonText\">LOGIN</string>\r\n    <string name=\"CheckText\">Check this out!</string>\r\n    <string name=\"toast_message\">Here is more information</string>\r\n    <string name=\"snack_line\">The switch is now </string>\r\n    <string name=\"type_here\">Type here</string>\r\n    <string name=\"switch_on_off\">Switch On/Off</string>\r\n    <string name=\"switch_on\">The switch is now on</string>\r\n    <string name=\"switch_off\">The switch is now off</string>\r\n    <string name=\"flag\">Canadian Flag</string>\r\n    <string name=\"undo\">Undo</string>\r\n    <string name=\"emailPrompt\">Enter your email address:</string>\r\n    <string name=\"type_email_here\">Type email here</string>\r\n    <string name=\"enter_password_text\">Type your password:</string>\r\n    <string name=\"your_profile\">Your profile</string>\r\n    <string name=\"your_name\">Your name:</string>\r\n    <string name=\"type_name_here\">Enter your name</string>\r\n    <string name=\"your_email\">Your email:</string>\r\n    <string name=\"your_picture\">Your picture:</string>\r\n    <string name=\"click_above\">Click the button above to take a picture.</string>\r\n    <string name=\"goToChat\">Go To Chat</string>\r\n    <string name=\"send\">SEND</string>\r\n    <string name=\"receive\">RECEIVE</string>\r\n    <string name=\"receiveIcon\">Harley Quinn</string>\r\n    <string name=\"sendIcon\">The Joker</string>\r\n    <string name=\"do_delete\">Do you want to delete this?</string>\r\n    <string name=\"desc1\">The selected row is: </string>\r\n    <string name=\"desc2\">The database id is: </string>\r\n    <string name=\"goToWeather\">Weather</string>\r\n    <string name=\"current_temperature\">Current Temperature</string>\r\n    <string name=\"currentWeather\">Current Weather</string>\r\n    <string name=\"min_temperature\">Min Temperature</string>\r\n    <string name=\"max_temperature\">Max Temperature</string>\r\n    <string name=\"UV_Rating\">UV Rating</string>\r\n    <string name=\"messageHere\">Message Here</string>\r\n    <string name=\"IDis\">ID=</string>\r\n    <string name=\"isASend\">Is a Send Message</string>\r\n    <string name=\"isARecieve\" >Is a Receive Message</string>\r\n    <string name=\"hide\">HIDE</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values-en/strings.xml	(revision 58877c61d1d72f21883b0e26e4a06adcac243c6a)
++++ app/src/main/res/values-en/strings.xml	(date 1606091037740)
+@@ -41,4 +41,5 @@
+     <string name="isASend">Is a Send Message</string>
+     <string name="isARecieve" >Is a Receive Message</string>
+     <string name="hide">HIDE</string>
++    <string name="GoToToolbar" >Page de la barre d\'outils GoTo</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/values-fr/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <string name=\"empty\"> </string>\r\n    <string name=\"app_name\">AndroidLabs</string>\r\n    <string name=\"hello_message\">Regardez mon GUI</string>\r\n    <string name=\"ButtonText\">S\\'IDENTIFIER</string>\r\n    <string name=\"CheckText\">Regarde ça!</string>\r\n    <string name=\"toast_message\">Voici plus d\\'informations</string>\r\n    <string name=\"snack_line\">Le commutateur est maintenant </string>\r\n    <string name=\"type_here\">Écrivez ici</string>\r\n    <string name=\"switch_on_off\">Allumer / éteindre</string>\r\n    <string name=\"switch_on\">L\\'interrupteur est maintenant activé</string>\r\n    <string name=\"switch_off\">L\\'interrupteur est maintenant éteint</string>\r\n    <string name=\"flag\">Drapeau français</string>\r\n    <string name=\"undo\">annuler</string>\r\n    <string name=\"emailPrompt\">Entrez votre adresse email:</string>\r\n    <string name=\"type_email_here\">Saisissez votre e-mail ici</string>\r\n    <string name=\"enter_password_text\">Tapez votre mot de passe:</string>\r\n    <string name=\"your_profile\">Votre profil</string>\r\n    <string name=\"your_name\">Votre nom:</string>\r\n    <string name=\"type_name_here\">Entrez votre nom</string>\r\n    <string name=\"your_email\">Votre email:</string>\r\n    <string name=\"your_picture\">Ta photo:</string>\r\n    <string name=\"click_above\">Cliquez sur le bouton ci-dessus pour prendre une photo.</string>\r\n    <string name=\"goToChat\">aller discuter</string>\r\n    <string name=\"send\">ENVOYER</string>\r\n    <string name=\"receive\">RECEVOIR</string>\r\n    <string name=\"receiveIcon\">Harley Quinn</string>\r\n    <string name=\"sendIcon\">The Joker</string>\r\n    <string name=\"do_delete\">Voulez-vous le supprimer?</string>\r\n    <string name=\"desc1\">La ligne sélectionnée est: </string>\r\n    <string name=\"desc2\">L\\'ID de la base de données est: </string>\r\n    <string name=\"goToWeather\">Météo</string>\r\n    <string name=\"current_temperature\">Température actuelle</string>\r\n    <string name=\"currentWeather\">Météo actuelle</string>\r\n    <string name=\"min_temperature\">Température min</string>\r\n    <string name=\"max_temperature\">Température maximale</string>\r\n    <string name=\"UV_Rating\">Évaluation UV</string>\r\n    <string name=\"messageHere\">Message ici</string>\r\n    <string name=\"IDis\">ID=</string>\r\n    <string name=\"isASend\">Est un message d\\'envoi</string>\r\n    <string name=\"isARecieve\" >Est un message de réception</string>\r\n    <string name=\"hide\">CACHER</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values-fr/strings.xml	(revision 58877c61d1d72f21883b0e26e4a06adcac243c6a)
++++ app/src/main/res/values-fr/strings.xml	(date 1606091037737)
+@@ -41,4 +41,5 @@
+     <string name="isASend">Est un message d\'envoi</string>
+     <string name="isARecieve" >Est un message de réception</string>
+     <string name="hide">CACHER</string>
++    <string name="GoToToolbar" >Page de la barre d\'outils GoTo</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"com.example.androidlabs\">\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-feature\r\n        android:name=\"android.hardware.camera\"\r\n        android:required=\"true\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:fullBackupContent=\"true\"\r\n        android:icon=\"@mipmap/custom\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/custom\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/AppTheme\">\r\n        <!-- <action android:name=\"android.intent.action.MAIN\" /> -->\r\n        <!-- <category android:name=\"android.intent.category.LAUNCHER\" /> -->\r\n        <!-- </intent-filter> -->\r\n        <activity android:name=\".MainActivity\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n<!--        <activity android:name=\".MainActivity\"/>-->\r\n        <activity android:name=\".WeatherForecast\" />\r\n        <activity android:name=\".ChatRoomActivity\" />\r\n        <activity android:name=\".ProfileActivity\" />\r\n        <activity android:name=\".EmptyActivity\" />\r\n        </application>\r\n\r\n    </manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 58877c61d1d72f21883b0e26e4a06adcac243c6a)
++++ app/src/main/AndroidManifest.xml	(date 1606090918227)
+@@ -1,7 +1,9 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="com.example.androidlabs">
++
+     <uses-permission android:name="android.permission.INTERNET" />
++
+     <uses-feature
+         android:name="android.hardware.camera"
+         android:required="true" />
+@@ -14,6 +16,7 @@
+         android:roundIcon="@mipmap/custom"
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
++        <activity android:name=".TestToolbar"></activity>
+         <!-- <action android:name="android.intent.action.MAIN" /> -->
+         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+         <!-- </intent-filter> -->
+@@ -23,12 +26,11 @@
+ 
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+-        </activity>
+-<!--        <activity android:name=".MainActivity"/>-->
++        </activity> <!-- <activity android:name=".MainActivity"/> -->
+         <activity android:name=".WeatherForecast" />
+         <activity android:name=".ChatRoomActivity" />
+         <activity android:name=".ProfileActivity" />
+         <activity android:name=".EmptyActivity" />
+-        </application>
++    </application>
+ 
+-    </manifest>
+\ No newline at end of file
++</manifest>
+\ No newline at end of file
