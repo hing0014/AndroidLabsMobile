@@ -1,0 +1,138 @@
+Index: app/src/main/res/layout-sw720dp/activity_chat_room.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/layout\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:ignore=\"UseSwitchCompatOrMaterialXml\">\r\n\r\n    <ListView\r\n        android:id=\"@+id/theListView\"\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"fill_parent\"\r\n        android:layout_alignParentStart=\"true\"\r\n        android:layout_above=\"@+id/send\"\r\n        />\r\n    <Button\r\n        android:id=\"@+id/send\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"@string/send\"\r\n        android:layout_alignParentBottom=\"true\"\r\n        />\r\n    <EditText\r\n        android:id=\"@+id/message\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:hint=\"@string/type_here\"\r\n        android:inputType=\"textShortMessage\"\r\n        android:autofillHints=\"@string/type_here\"\r\n        android:layout_toEndOf=\"@+id/send\"\r\n        android:layout_toStartOf=\"@+id/receive\"\r\n        android:layout_alignParentBottom=\"true\"\r\n        />\r\n    <Button\r\n        android:id=\"@+id/receive\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"@string/receive\"\r\n        android:layout_alignParentBottom=\"true\"\r\n        android:layout_alignEnd=\"@+id/theListView\"\r\n        />\r\n    <FrameLayout\r\n        android:id=\"@+id/frame\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_alignEnd=\"@+id/theListView\"/>\r\n\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout-sw720dp/activity_chat_room.xml	(revision 3aa1313246f947041e042793e93f55927cd9ebe3)
++++ app/src/main/res/layout-sw720dp/activity_chat_room.xml	(date 1605660141555)
+@@ -44,6 +44,9 @@
+         android:id="@+id/frame"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_alignEnd="@+id/theListView"/>
++        android:layout_alignParentEnd="true"
++        android:layout_alignParentTop="true"
++        android:layout_toRightOf="@id/receive"
++        android:layout_alignParentBottom="true"/>
+ 
+ </RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"com.example.androidlabs\">\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-feature\r\n        android:name=\"android.hardware.camera\"\r\n        android:required=\"true\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:fullBackupContent=\"true\"\r\n        android:icon=\"@mipmap/custom\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/custom\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/AppTheme\">\r\n        <!-- <action android:name=\"android.intent.action.MAIN\" /> -->\r\n        <!-- <category android:name=\"android.intent.category.LAUNCHER\" /> -->\r\n        <!-- </intent-filter> -->\r\n        <activity android:name=\".ChatRoomActivity\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity android:name=\".MainActivity\"/>\r\n        <activity android:name=\".WeatherForecast\" />\r\n<!--        <activity android:name=\".ChatRoomActivity\" />-->\r\n        <activity android:name=\".ProfileActivity\" />\r\n        <activity android:name=\".EmptyActivity\" />\r\n        </application>\r\n\r\n    </manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 3aa1313246f947041e042793e93f55927cd9ebe3)
++++ app/src/main/AndroidManifest.xml	(date 1605720607172)
+@@ -17,16 +17,16 @@
+         <!-- <action android:name="android.intent.action.MAIN" /> -->
+         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+         <!-- </intent-filter> -->
+-        <activity android:name=".ChatRoomActivity">
++        <activity android:name=".MainActivity">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+ 
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
+-        <activity android:name=".MainActivity"/>
++<!--        <activity android:name=".MainActivity"/>-->
+         <activity android:name=".WeatherForecast" />
+-<!--        <activity android:name=".ChatRoomActivity" />-->
++        <activity android:name=".ChatRoomActivity" />
+         <activity android:name=".ProfileActivity" />
+         <activity android:name=".EmptyActivity" />
+         </application>
+Index: app/src/main/java/com/example/androidlabs/ChatRoomActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.androidlabs;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.app.AlertDialog;\r\nimport android.content.ContentValues;\r\nimport android.content.Intent;\r\nimport android.database.Cursor;\r\nimport android.database.sqlite.SQLiteDatabase;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.BaseAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.FrameLayout;\r\nimport android.widget.ListView;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class ChatRoomActivity extends AppCompatActivity\r\n{\r\n    private ArrayList<Message> elements = new ArrayList<>();\r\n    private MyListAdapter myAdapter;\r\n    SQLiteDatabase db;\r\n    int count = 0;\r\n    boolean isTablet = false;\r\n    public static final String ITEM_MESSAGE = \"MESSAGE\";\r\n    public static final String ITEM_TYPE = \"TYPE\";\r\n    public static final String ITEM_ID = \"ID\";\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_chat_room);\r\n\r\n        FrameLayout frame = findViewById(R.id.frame);\r\n        if(frame != null) isTablet = true;\r\n\r\n        ListView myList = findViewById(R.id.theListView);\r\n        loadDataFromDatabase();\r\n        myList.setAdapter(myAdapter = new MyListAdapter());\r\n\r\n        Button sendButton = findViewById(R.id.send);\r\n        sendButton.setOnClickListener( click -> {\r\n            ++count;\r\n            TextView textView = findViewById(R.id.message);\r\n            String messageText = textView.getText().toString();\r\n            ContentValues newRowValues = new ContentValues();\r\n            newRowValues.put(MyOpener.COL_MESSAGE, messageText);\r\n            newRowValues.put(MyOpener.COL_SENDER, \"send\");\r\n            long newId = db.insert(MyOpener.TABLE_NAME, null, newRowValues);\r\n            elements.add(new Message(\"send\", messageText, newId));\r\n            myAdapter.notifyDataSetChanged();\r\n            textView.setText(\"\");\r\n            Toast.makeText(this, \"Inserted item id:\"+newId, Toast.LENGTH_LONG).show();\r\n        });\r\n\r\n        Button recButton = findViewById(R.id.receive);\r\n        recButton.setOnClickListener( click -> {\r\n            TextView textView = findViewById(R.id.message);\r\n            String messageText = textView.getText().toString();\r\n            ContentValues newRowValues = new ContentValues();\r\n            newRowValues.put(MyOpener.COL_MESSAGE, messageText);\r\n            newRowValues.put(MyOpener.COL_SENDER, \"receive\");\r\n            long newId = db.insert(MyOpener.TABLE_NAME, null, newRowValues);\r\n            elements.add(new Message(\"receive\", messageText, newId));\r\n            myAdapter.notifyDataSetChanged();\r\n            textView.setText(\"\");\r\n        });\r\n\r\n        myList.setOnItemClickListener( (parent, view, pos, id) -> {\r\n            Bundle dataToPass = new Bundle();\r\n            Message temp = elements.get(pos);\r\n            dataToPass.putString(ITEM_MESSAGE, temp.getMessage() );\r\n            dataToPass.putString(ITEM_TYPE, temp.getType());\r\n            dataToPass.putLong(ITEM_ID, temp.getId());\r\n\r\n            if(isTablet)\r\n            {\r\n                DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment\r\n                dFragment.setArguments( dataToPass ); //pass it a bundle for information\r\n                getSupportFragmentManager()\r\n                        .beginTransaction()\r\n                        .replace(R.id.frame, dFragment) //Add the fragment in FrameLayout\r\n                        .commit(); //actually load the fragment. Calls onCreate() in DetailFragment\r\n            }\r\n            else //isPhone\r\n            {\r\n                Intent nextActivity = new Intent(ChatRoomActivity.this, EmptyActivity.class);\r\n                nextActivity.putExtras(dataToPass); //send data to next activity\r\n                startActivity(nextActivity); //make the transition\r\n            }\r\n\r\n            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);\r\n            alertDialogBuilder.setTitle(getResources().getString(R.string.do_delete)).setMessage(getResources().getString(R.string.desc1) + pos + \"\\n\" + getResources().getString(R.string.desc2) + getDatabaseID(pos))\r\n                    .setPositiveButton(\"Yes\", (click, arg) ->\r\n                    {\r\n                        Message selectedContact = elements.get(pos);\r\n                        deleteContact(selectedContact);\r\n                        elements.remove(pos);\r\n                        myAdapter.notifyDataSetChanged();\r\n                    })\r\n                    .setNegativeButton(\"No\", (click, arg) -> {  })\r\n                    .create().show();\r\n\r\n        }   );\r\n    }\r\n\r\n    private class MyListAdapter extends BaseAdapter\r\n    {\r\n\r\n        public int getCount() { return elements.size();}\r\n\r\n        public Object getItem(int position){return position;}\r\n\r\n        public long getItemId(int position) { return position; }\r\n\r\n        public View getView(int position, View old, ViewGroup parent)\r\n        {\r\n            View newView;\r\n            Message arEl = elements.get(position);\r\n            LayoutInflater inflater = getLayoutInflater();\r\n            if(arEl.getType().equals(\"send\"))\r\n            {\r\n                newView = inflater.inflate(R.layout.send_layout, parent, false);\r\n                TextView messageText = newView.findViewById(R.id.textGoesHere);\r\n                messageText.setText(arEl.getMessage());\r\n            }\r\n            else\r\n            {\r\n                newView = inflater.inflate(R.layout.receive_layout, parent, false);\r\n                TextView messageText = newView.findViewById(R.id.textGoesHere);\r\n                messageText.setText(arEl.getMessage());\r\n            }\r\n            return newView;\r\n        }\r\n    }\r\n\r\n    static class Message\r\n    {\r\n        String message;\r\n        String type;\r\n        long id;\r\n\r\n        private Message(String type, String message, long i)\r\n        {\r\n            this.type = type;\r\n            this.message = message;\r\n            this.id = i;\r\n\r\n        }\r\n\r\n        public String getMessage()\r\n        {\r\n            return message;\r\n        }\r\n        public String getType()\r\n        {\r\n            return type;\r\n        }\r\n        public long getId()\r\n        {\r\n            return id;\r\n        }\r\n    }\r\n\r\n    private void loadDataFromDatabase()\r\n    {\r\n        //get a database connection:\r\n        MyOpener dbOpener = new MyOpener(this);\r\n        db = dbOpener.getWritableDatabase(); //This calls onCreate() if you've never built the table before, or onUpgrade if the version here is newer\r\n        // We want to get all of the columns. Look at MyOpener.java for the definitions:\r\n        String [] columns = {MyOpener.COL_ID, MyOpener.COL_MESSAGE, MyOpener.COL_SENDER};\r\n        //query all the results from the database:\r\n        Cursor results = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);\r\n        printCursor(results, db.getVersion());\r\n        //Now the results object has rows of results that match the query.\r\n        //find the column indices:\r\n        int messageColumnIndex = results.getColumnIndex(MyOpener.COL_MESSAGE);\r\n        int senderColIndex = results.getColumnIndex(MyOpener.COL_SENDER);\r\n        int idColIndex = results.getColumnIndex(MyOpener.COL_ID);\r\n\r\n        //iterate over the results, return true if there is a next item:\r\n        while(results.moveToNext())\r\n        {\r\n            String message = results.getString(messageColumnIndex);\r\n            String sender = results.getString(senderColIndex);\r\n            long id = results.getLong(idColIndex);\r\n\r\n            //add the new Contact to the array list:\r\n            elements.add(new Message(sender, message, id));\r\n        }\r\n    }\r\n\r\n    protected void deleteContact(Message c)\r\n    {\r\n        db.delete(MyOpener.TABLE_NAME, MyOpener.COL_ID + \"= ?\", new String[] {Long.toString(c.getId())});\r\n    }\r\n\r\n    protected void printCursor( Cursor c, int version)\r\n    {\r\n        Log.d(\"version\", Integer.toString(version));\r\n        Log.d(\"Column Quantity\", Integer.toString(c.getColumnCount()));\r\n        Log.d(\"Column Names\", c.getColumnName(0) + \" \" + c.getColumnName(1) + \" \" + c.getColumnName(2));\r\n        Log.d(\"Row Quantity\", Integer.toString(c.getCount()));\r\n\r\n        while(c.moveToNext())\r\n        {\r\n            String index = c.getString( c.getColumnIndex(MyOpener.COL_ID));\r\n            String sender = c.getString( c.getColumnIndex(MyOpener.COL_SENDER));\r\n            String message = c.getString( c.getColumnIndex(MyOpener.COL_MESSAGE));\r\n\r\n            String mesg = \"index: \" + index + \" from: \" + sender + \" message: \" + message;\r\n\r\n            Log.d(\"Row\", mesg);\r\n        }\r\n        c.moveToPosition(-1);\r\n    }\r\n\r\n    private long getDatabaseID(int id)\r\n    {\r\n        MyOpener dbOpener = new MyOpener(this);\r\n        db = dbOpener.getWritableDatabase();\r\n        String [] columns = {MyOpener.COL_ID, MyOpener.COL_MESSAGE, MyOpener.COL_SENDER};\r\n        Cursor results = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);\r\n        printCursor(results, db.getVersion());\r\n        int idColIndex = results.getColumnIndex(MyOpener.COL_ID);\r\n\r\n        int i = 0;\r\n        long ido = -1;\r\n        while(results.moveToNext())\r\n        {\r\n            if(i == id) ido = results.getLong(idColIndex);\r\n            i++;\r\n        }\r\n        return ido;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/androidlabs/ChatRoomActivity.java	(revision 3aa1313246f947041e042793e93f55927cd9ebe3)
++++ app/src/main/java/com/example/androidlabs/ChatRoomActivity.java	(date 1605661259131)
+@@ -27,10 +27,11 @@
+     private MyListAdapter myAdapter;
+     SQLiteDatabase db;
+     int count = 0;
+-    boolean isTablet = false;
++    public static boolean isTablet = false;
+     public static final String ITEM_MESSAGE = "MESSAGE";
+     public static final String ITEM_TYPE = "TYPE";
+     public static final String ITEM_ID = "ID";
++    public static final String IS_TABLET = "TABLET";
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -78,6 +79,7 @@
+             dataToPass.putString(ITEM_MESSAGE, temp.getMessage() );
+             dataToPass.putString(ITEM_TYPE, temp.getType());
+             dataToPass.putLong(ITEM_ID, temp.getId());
++            dataToPass.putBoolean(IS_TABLET, isTablet);
+ 
+             if(isTablet)
+             {
+@@ -95,6 +97,10 @@
+                 startActivity(nextActivity); //make the transition
+             }
+ 
++        });
++
++        myList.setOnItemLongClickListener( (parent, view, pos, id) -> {
++
+             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+             alertDialogBuilder.setTitle(getResources().getString(R.string.do_delete)).setMessage(getResources().getString(R.string.desc1) + pos + "\n" + getResources().getString(R.string.desc2) + getDatabaseID(pos))
+                     .setPositiveButton("Yes", (click, arg) ->
+@@ -103,10 +109,15 @@
+                         deleteContact(selectedContact);
+                         elements.remove(pos);
+                         myAdapter.notifyDataSetChanged();
++
++                        if(isTablet)
++                        {
++                            frame.removeAllViews();
++                        }
+                     })
+-                    .setNegativeButton("No", (click, arg) -> {  })
++                    .setNegativeButton("No", (click, arg) -> {})
+                     .create().show();
+-
++            return true;
+         }   );
+     }
+ 
+Index: app/src/main/java/com/example/androidlabs/DetailsFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.androidlabs;\r\n\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.database.Cursor;\r\nimport android.database.sqlite.SQLiteDatabase;\r\nimport android.os.Bundle;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.BaseAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.CheckBox;\r\nimport android.widget.ListView;\r\nimport android.widget.TextView;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Arrays;\r\n\r\n\r\npublic class DetailsFragment extends Fragment\r\n{\r\n    private AppCompatActivity parentActivity;\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)\r\n    {\r\n        Bundle dataFromActivity = getArguments();\r\n        long id = dataFromActivity.getLong(ChatRoomActivity.ITEM_ID);\r\n        String message = dataFromActivity.getString(ChatRoomActivity.ITEM_MESSAGE);\r\n        String type = dataFromActivity.getString(ChatRoomActivity.ITEM_TYPE);\r\n\r\n        // Inflate the layout for this fragment\r\n        View result =  inflater.inflate(R.layout.fragment_details, container, false);\r\n\r\n        //show the message\r\n        TextView messageTV = (TextView)result.findViewById(R.id.messageHere);\r\n        messageTV.setText(message);\r\n\r\n        //show the id:\r\n        TextView IDisTV = (TextView)result.findViewById(R.id.IDis);\r\n        String idStr = \"ID =\" + id;\r\n        IDisTV.setText(idStr);\r\n\r\n        CheckBox checkIt = (CheckBox)result.findViewById(R.id.checkIt);\r\n        if(type.equals(\"send\")) checkIt.setChecked(true);\r\n\r\n        // get the delete button, and add a click listener:\r\n        Button finishButton = (Button)result.findViewById(R.id.Hide);\r\n        finishButton.setOnClickListener( clk -> {\r\n            //Tell the parent activity to remove\r\n            parentActivity.getSupportFragmentManager().beginTransaction().remove(this).commit();\r\n        });\r\n\r\n        return result;\r\n    }\r\n\r\n    @Override\r\n    public void onAttach(Context context) {\r\n        super.onAttach(context);\r\n\r\n        //context will either be FragmentExample for a tablet, or EmptyActivity for phone\r\n        parentActivity = (AppCompatActivity)context;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/androidlabs/DetailsFragment.java	(revision 3aa1313246f947041e042793e93f55927cd9ebe3)
++++ app/src/main/java/com/example/androidlabs/DetailsFragment.java	(date 1605659262143)
+@@ -35,6 +35,7 @@
+         long id = dataFromActivity.getLong(ChatRoomActivity.ITEM_ID);
+         String message = dataFromActivity.getString(ChatRoomActivity.ITEM_MESSAGE);
+         String type = dataFromActivity.getString(ChatRoomActivity.ITEM_TYPE);
++        boolean isTablet = dataFromActivity.getBoolean(ChatRoomActivity.IS_TABLET);
+ 
+         // Inflate the layout for this fragment
+         View result =  inflater.inflate(R.layout.fragment_details, container, false);
+@@ -56,6 +57,11 @@
+         finishButton.setOnClickListener( clk -> {
+             //Tell the parent activity to remove
+             parentActivity.getSupportFragmentManager().beginTransaction().remove(this).commit();
++            if(!isTablet)
++            {
++                Intent goToChatRoom = new Intent(container.getContext(), ChatRoomActivity.class);
++                startActivity(goToChatRoom);
++            }
+         });
+ 
+         return result;

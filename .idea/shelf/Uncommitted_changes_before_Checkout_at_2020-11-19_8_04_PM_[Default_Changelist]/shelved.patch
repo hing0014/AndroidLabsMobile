@@ -1,0 +1,19 @@
+Index: app/src/main/res/layout-sw720dp/activity_chat_room.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/layout\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:ignore=\"UseSwitchCompatOrMaterialXml\">\r\n\r\n    <ListView\r\n        android:id=\"@+id/theListView\"\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"fill_parent\"\r\n        android:layout_alignParentStart=\"true\"\r\n        android:layout_above=\"@+id/send\"\r\n        />\r\n    <Button\r\n        android:id=\"@+id/send\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"@string/send\"\r\n        android:layout_alignParentBottom=\"true\"\r\n        />\r\n    <EditText\r\n        android:id=\"@+id/message\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:hint=\"@string/type_here\"\r\n        android:inputType=\"textShortMessage\"\r\n        android:autofillHints=\"@string/type_here\"\r\n        android:layout_toEndOf=\"@+id/send\"\r\n        android:layout_toStartOf=\"@+id/receive\"\r\n        android:layout_alignParentBottom=\"true\"\r\n        />\r\n    <Button\r\n        android:id=\"@+id/receive\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"@string/receive\"\r\n        android:layout_alignParentBottom=\"true\"\r\n        android:layout_alignEnd=\"@+id/theListView\"\r\n        />\r\n    <FrameLayout\r\n        android:id=\"@+id/frame\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_alignEnd=\"@+id/theListView\"\r\n        android:layout_alignRight=\"@+id/message\"/>\r\n\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout-sw720dp/activity_chat_room.xml	(revision 8baf57829cbb43e3e2e7ad7af023c3865465aed6)
++++ app/src/main/res/layout-sw720dp/activity_chat_room.xml	(date 1605810229375)
+@@ -44,7 +44,6 @@
+         android:id="@+id/frame"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_alignEnd="@+id/theListView"
+-        android:layout_alignRight="@+id/message"/>
++        android:layout_toEndOf="@+id/theListView" />
+ 
+ </RelativeLayout>
+\ No newline at end of file
